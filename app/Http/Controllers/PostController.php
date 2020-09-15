@@ -15,6 +15,9 @@ class PostController extends Controller
     public function index()
     {
         //
+        return view('posts.index', [
+            'posts' => Post::latest()->with('user')->paginate(20)
+        ]);
     }
 
     /**
@@ -25,6 +28,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -33,9 +37,17 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
         //
+        $attributes = $request->validate([
+            'title' => 'required|min:5',
+            'body' => 'required'
+        ]);
+
+        $attributes['user_id'] = auth()->user()->id;
+        $post->create($attributes);
+        return redirect('/posts');
     }
 
     /**
@@ -47,6 +59,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        return view('posts.show',compact('post'));
     }
 
     /**
@@ -58,6 +71,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        return view('posts.edit', compact('post'));
     }
 
     /**

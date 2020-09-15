@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -24,6 +25,9 @@ class PostFactory extends Factory
     {
         return [
             //
+            'user_id' => User::pluck('id')->random(),
+            'title' => rtrim($this->faker->sentence(5,10),'.'),
+            'body' => $this->faker->paragraph()
         ];
     }
 }
