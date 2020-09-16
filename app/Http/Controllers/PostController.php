@@ -47,6 +47,7 @@ class PostController extends Controller
 
         $attributes['user_id'] = auth()->user()->id;
         $post->create($attributes);
+
         return redirect('/posts');
     }
 
@@ -59,6 +60,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        $post->increment('views_count');
         return view('posts.show',compact('post'));
     }
 
@@ -84,6 +86,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $attributes = $request->validate([
+            'title' => 'required|min:5',
+            'body' => 'required'
+        ]);
+        $attributes['user_id'] = auth()->user()->id;
+
+        $post->update($attributes);
+
+        return redirect('/posts/'. $post->id);
     }
 
     /**
@@ -95,5 +106,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post->delete($post);
+        return redirect('/posts');
     }
 }

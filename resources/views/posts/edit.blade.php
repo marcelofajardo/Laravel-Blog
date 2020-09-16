@@ -7,10 +7,14 @@
       <a
         class="py-1 px-3 border border-red-400 text-red-400
         hover:border-red-500 hover:text-red-500"
-        href="#"
-        onclick="event.preventDefault;document.querySelector('#deletePost').submit"
+        href="/post"
+        onclick="event.preventDefault();document.querySelector('#deletePost').submit()"
       >Delete Post</a>
-          <form id="deletePost" action="/posts/{{$post->id}}" method="POST" class="hidden">
+          <form id="deletePost"
+            class="hidden"
+            action="/posts/{{$post->id}}"
+            method="POST"
+          >
           @method('DELETE')
           @csrf
           </form>
@@ -22,7 +26,7 @@
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class="p-6">
 
-        <form action="/posts{{$post->id}}" method="POST">
+        <form action="/posts/{{$post->id}}" method="POST">
             @method('PUT')
             @csrf
             <div class="mb-6">
@@ -35,7 +39,7 @@
 
             <div class="mb-6">
               <label class="mb-2 block text-sm font-bold text-gray-700 uppercase">Body</label>
-              <textarea class="w-full border text-gray-700" name="body" rows="10">{{$post->body}}</textarea>
+              <textarea class="py-4 px-2 w-full border text-gray-700" name="body" rows="10">{{$post->body}}</textarea>
               @error('body')
               <span class="text-xs text-red-400 italic">{{$message}}</span>
               @enderror

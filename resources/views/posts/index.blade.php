@@ -36,7 +36,7 @@
             <div class="flex items-center">
               <p
                 class="mr-2 text-sm text-gray-600"
-              >123
+              >{{$post->views_count}}
                 <a href="#">views</a>
               </p>
 
@@ -44,12 +44,6 @@
                 class="mr-2 text-sm text-gray-600"
               >3
                 <a href="#">comments</a>
-              </p>
-
-              <p
-                class="mr-2 text-sm text-gray-600"
-              >1
-                <a href="#">share</a>
               </p>
 
               <a
