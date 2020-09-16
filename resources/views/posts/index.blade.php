@@ -17,9 +17,7 @@
         <div class="p-6 {{$loop->last ? '' : 'border-b border-gray-200'}}">
           <div class="text-xs text-gray-700 flex justify-between items-center mb-2">
             <p>Posted {{$post->created_date}}</p>
-            <a
-            class="text-blue-400 hover:text-blue-500"
-          href="{{$post->path('edit')}}">Edit</a>
+
           </div>
 
           <h2 class="text-xl font-semibold mb-2">

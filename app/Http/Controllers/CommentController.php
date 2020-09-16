@@ -38,7 +38,8 @@ class CommentController extends Controller
     public function edit(Post $post, Comment $comment)
     {
         //
-       return view('comments.edit',compact('post','comment'));
+        $this->authorize('update', $post);
+        return view('comments.edit',compact('post','comment'));
     }
 
     /**
@@ -51,26 +52,28 @@ class CommentController extends Controller
     public function update(Request $request, Post $post, Comment $comment)
     {
         //
+        $this->authorize('update', $post);
         $attribute = $request->validate([
             'body' => 'required|min:5'
-        ]);
-        $attribute['user_id'] = auth()->user()->id;
+            ]);
+            $attribute['user_id'] = auth()->user()->id;
 
-        $post->comments()->update($attribute);
+            $post->comments()->update($attribute);
 
-        return redirect('/posts/'.$post->id);
+            return redirect('/posts/'.$post->id);
+        }
+
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  \App\Models\Comment  $comment
+         * @return \Illuminate\Http\Response
+         */
+        public function destroy(Post $post, Comment $comment)
+        {
+            //
+            $this->authorize('delete', $post);
+            $comment->delete();
+            return redirect('/posts/'.$post->id);
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post, Comment $comment)
-    {
-        //
-        $comment->delete();
-        return redirect('/posts/'.$post->id);
-    }
-}

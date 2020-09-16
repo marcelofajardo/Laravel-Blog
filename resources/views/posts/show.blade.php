@@ -14,7 +14,14 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-6">
                 <div class="p-6">
                     <div>
-                        <h2 class="text-xl font-semibold mb-2">{{ $post->title }}</h2>
+                        <div class="flex justify-between items-center mb-2">
+                            <h2 class="text-xl font-semibold">{{ $post->title }}</h2>
+                            {{-- move to show --}}
+                            @can('update', $post)
+                            <a class="text-blue-400 hover:text-blue-500 text-xs" href="{{$post->path('edit')}}">Edit
+                            </a>
+                            @endcan
+                        </div>
                         <p class="text-gray-900 text-sm mb-2">{{ $post->body }}</p>
                         <p class="text-xs text-gray-500 mb-2">Author:
                             <a class="text-blue-400" href="#">{{$post->user->name}}</a>
@@ -30,19 +37,20 @@
                         @foreach ($comments as $comment)
                         <div class="mb-6">
                             <div class="flex justify-end text-xs">
-                                <a
-                                    class="mr-2 text-blue-400 hover:text-blue-500"
-                            href="{{$comment->path('edit', $post)}}"
-                                >Edit</a>
-                                <a
-                                    class="text-red-400"
-                                    href="#"
-                                    onclick="event.preventDefault();document.querySelector('#deleteComment').submit()"
-                                >Delete</a>
-                            <form id="deleteComment" class="hidden" action="{{$comment->path('destroy',$post)}}" method="POST">
+                                @can('update', $comment)
+                                <a class="mr-2 text-blue-400 hover:text-blue-500"
+                                    href="{{$comment->path('edit', $post)}}">Edit</a>
+                                @endcan
+
+                                @can('delete', $comment)
+                                <a class="text-red-400" href="#"
+                                    onclick="event.preventDefault();document.querySelector('#deleteComment').submit()">Delete</a>
+                                <form id="deleteComment" class="hidden" action="{{$comment->path('destroy',$post)}}"
+                                    method="POST">
                                     @method('DELETE')
                                     @csrf
                                 </form>
+                                @endcan
                             </div>
                             <p class="mb-2">
                                 {{ $comment->body }}

@@ -64,10 +64,10 @@ class PostController extends Controller
         return view('posts.show',[
             'post' => $post,
             'comments' => $post->comments
-        ]);
-    }
+            ]);
+        }
 
-    /**
+        /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Post  $post
@@ -76,6 +76,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        $this->authorize('update',$post);
         return view('posts.edit', compact('post'));
     }
 
@@ -89,26 +90,28 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $this->authorize('update',$post);
         $attributes = $request->validate([
             'title' => 'required|min:5',
             'body' => 'required'
-        ]);
-        $attributes['user_id'] = auth()->user()->id;
+            ]);
+            $attributes['user_id'] = auth()->user()->id;
 
-        $post->update($attributes);
+            $post->update($attributes);
 
-        return redirect('/posts/'. $post->id);
-    }
+            return redirect('/posts/'. $post->id);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  \App\Models\Post  $post
+         * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
         //
+        $this->authorize('delete', $post);
         $post->delete($post);
         return redirect('/posts');
     }
