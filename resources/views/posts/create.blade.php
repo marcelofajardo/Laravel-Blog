@@ -10,47 +10,40 @@
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class="p-6">
 
-          <form action="/posts" method="POST">
+        <form action="{{route('posts.store')}}" method="POST">
             @csrf
             <div class="mb-6">
-              <label
-                class="mb-2 block text-sm font-bold text-gray-700 uppercase"
-              >Title</label>
+              <label class="mb-2 block text-sm font-bold text-gray-700 uppercase">Title</label>
               <input
-                class="w-full py-4 px-2 text-gray-700 border"
+                class="w-full @error('title') border-red-500 @enderror border px-4 py-2 rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none"
                 type="text"
                 name="title"
-              >
+            value="{{old('title')}}"
+                >
               @error('title')
-              <span class="text-xs text-red-400 italic">{{$message}}</span>
+              <span class="text-xs text-red-400 mt-1 italic">
+                {{$message}}
+              </span>
               @enderror
             </div>
 
             <div class="mb-6">
-              <label
-                class="mb-2 block text-sm font-bold text-gray-700 uppercase"
-              >Body</label>
-              <textarea
-                class="w-full border text-gray-700"
-                name="body"
-                rows="10"
-              ></textarea>
+              <label class="mb-2 block text-sm font-bold text-gray-700 uppercase">Body</label>
+              <textarea class="w-full border px-4 py-2 rounded outline-none
+                      text-gray-700 @error('body') border-red-500 @enderror
+            focus:border-blue-500 focus:shadow-outline" name="body" rows="10" placeholder="Write something..">{{old('body')}}</textarea>
               @error('body')
-              <span class="text-xs text-red-400 italic">{{$message}}</span>
+              <span class="text-xs text-red-400 mt-1 italic">
+                {{$message}}
+              </span>
               @enderror
             </div>
 
             <div class="mb-6 flex items-center">
-              <button
-                class="bg-blue-400 text-white rounded py-2 px-8
-                  hover:bg-blue-500"
-                type="submit"
-              >Post
+              <button class="bg-blue-400 text-white rounded py-2 px-8
+                  hover:bg-blue-500" type="submit">Post
               </button>
-              <a
-                class="ml-4 text-red-400 hover:text-red-500"
-                href="/posts"
-              >Cancel</a>
+              <a class="ml-4 text-red-400 hover:text-red-500" href="/posts">Cancel</a>
             </div>
           </form>
         </div>

@@ -19,7 +19,7 @@ class AddMultipleColumnToPosts extends Migration
             $table->unsignedBigInteger('comments_count')->default(0);
             $table->unsignedBigInteger('shares_count')->default(0);
             $table->bigInteger('votes_count')->default(0);
-            $table->unsignedBigInteger('best_comment')->nullable();
+            $table->tinyInteger('best_comment')->nullable();
         });
     }
 

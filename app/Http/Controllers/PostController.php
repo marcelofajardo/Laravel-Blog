@@ -61,7 +61,10 @@ class PostController extends Controller
     {
         //
         $post->increment('views_count');
-        return view('posts.show',compact('post'));
+        return view('posts.show',[
+            'post' => $post,
+            'comments' => $post->comments
+        ]);
     }
 
     /**

@@ -5,7 +5,7 @@
         Posts
       </h2>
       <a class="py-1 px-3 border border-blue-400 text-blue-400
-          hover:border-blue-500 hover:text-blue-500" href="/posts/create">Create Post</a>
+    hover:border-blue-500 hover:text-blue-500" href="/posts/create">Create Post</a>
     </div>
 
   </x-slot>
@@ -19,11 +19,11 @@
             <p>Posted {{$post->created_date}}</p>
             <a
             class="text-blue-400 hover:text-blue-500"
-            href="/posts/{{$post->id}}/edit">Edit</a>
+          href="{{$post->path('edit')}}">Edit</a>
           </div>
 
           <h2 class="text-xl font-semibold mb-2">
-            <a class="hover:underline" href="/posts/{{$post->id}}">{{ $post->title }}</a>
+            <a class="hover:underline" href="{{$post->path('show')}}">{{ $post->title }}</a>
           </h2>
 
           <p class="text-gray-900 text-sm mb-2">{{ $post->body }}</p>
