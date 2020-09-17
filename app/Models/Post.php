@@ -10,14 +10,14 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable= ['title','body','user_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-     public function comments()
+    public function comments()
     {
         return $this->morphMany('App\Models\Comment', 'commentable');
     }
@@ -36,5 +36,10 @@ class Post extends Model
     public function getCreatedDateAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    public function getCommentsCountAttribute()
+    {
+        return $this->comments()->count();
     }
 }
