@@ -27,7 +27,8 @@ class PostFactory extends Factory
             //
             'user_id' => User::pluck('id')->random(),
             'title' => rtrim($this->faker->sentence(5,10),'.'),
-            'body' => $this->faker->paragraph()
+            'body' => $this->faker->paragraph(),
+            'views_count' => $this->faker->randomDigit
         ];
     }
 }

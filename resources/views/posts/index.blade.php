@@ -12,9 +12,9 @@
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+      <div class="p-6 bg-white overflow-hidden shadow-xl sm:rounded-lg">
         @foreach ($posts as $post)
-        <div class="p-6 {{$loop->last ? '' : 'border-b border-gray-200'}}">
+        <div class="{{$loop->last ? '' : 'border-b border-gray-200'}}">
           <div class="text-xs text-gray-700 flex justify-between items-center mb-2">
             <p>Posted {{$post->created_date}}</p>
 
@@ -40,7 +40,7 @@
 
               <p
                 class="mr-2 text-sm text-gray-600"
-              >3
+              >{{$post->comments_count}}
                 <a href="#">comments</a>
               </p>
 
@@ -56,6 +56,9 @@
             </div>
         </div>
         @endforeach
+<p class="mt-6">
+  {{$posts->links()}}
+</p>
       </div>
     </div>
   </div>

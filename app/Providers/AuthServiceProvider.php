@@ -19,7 +19,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Post::class => PostPolicy::class,
-        Comment::class => PostCommentPolicy::class,
     ];
 
     /**
@@ -31,6 +30,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update-comment', function ($user, $comment) {
+            return $user->id === $comment->user_id;
+        });
+        Gate::define('delete-comment', function ($user, $comment) {
+            return $user->id === $comment->user_id;
+        });
     }
 }

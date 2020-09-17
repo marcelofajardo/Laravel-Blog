@@ -11,19 +11,14 @@ class Comment extends Model
 
     protected $guarded = [];
 
-    public function post()
+    public function commentable()
     {
-        return $this->belongsTo(Post::class);
+        return $this->morphTo();
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function path($append = 'index',Post $post)
-    {
-        return route("post.comments.{$append}",[$post->id, $this->id]);
     }
 
     public function getCreatedDateAttribute()

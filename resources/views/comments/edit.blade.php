@@ -11,7 +11,7 @@
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class="p-6">
 
-        <form action="{{$comment->path('update',$post)}}" method="POST">
+        <form action="{{route('post.comments.update', [$post->id, $comment->id])}}" method="POST">
           @method('PUT')
           @csrf
 

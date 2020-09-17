@@ -27,7 +27,8 @@ class CommentFactory extends Factory
         return [
             //
             'user_id' => User::pluck('id')->random(),
-            'post_id' => Post::pluck('id')->random(),
+            'commentable_id' => Post::pluck('id')->random(),
+            'commentable_type' => 'App\Models\Post',
             'body' => $this->faker->paragraph()
         ];
     }

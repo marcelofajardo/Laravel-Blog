@@ -17,7 +17,12 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('title');
+            $table->string('slug');
             $table->text('body');
+            $table->unsignedBigInteger('views_count')->default(0);
+            $table->unsignedBigInteger('comments_count')->default(0);
+            $table->bigInteger('likes_count')->default(0);
+            $table->tinyInteger('best_comment')->nullable();
             $table->timestamps();
         });
     }
