@@ -34,6 +34,7 @@ class PostCommentController extends Controller
         $attribute = $request->validate([
             'body' => 'required|min:5|max:255'
             ]);
+
         $comment->update($attribute);
 
         return redirect('/posts/'.$post->id);

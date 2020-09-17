@@ -16,7 +16,10 @@ trait Likable
     public function like($liked = true)
     {
         $this->likes()->updateOrCreate(
-            [ 'user_id' => auth()->id() ],
+            [
+              'user_id' => auth()->id(),
+              'likable_id' => $this->id
+            ],
             [ 'liked' => $liked ]
         );
     }
