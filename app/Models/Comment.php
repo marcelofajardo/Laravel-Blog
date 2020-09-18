@@ -9,8 +9,8 @@ use App\Traits\Likable;
 class Comment extends Model
 {
     use HasFactory, likable;
-
     protected $fillable= ['body', 'user_id'];
+    protected $with = ['user'];
 
     public function commentable()
     {
@@ -29,8 +29,8 @@ class Comment extends Model
 
     public function getlikesCountAttribute()
     {
-        $likes = $this->likes()->where('liked', true)->count();
-        $dislikes = $this->likes()->where('liked', false)->count();
+        $likes = $this->likes()->where('liked', true)->with('like')->count();
+        $dislikes = $this->likes()->where('liked', false)->with('like')->count();
         return $likes - $dislikes;
     }
 }

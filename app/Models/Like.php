@@ -14,5 +14,6 @@ class Like extends Model
     public function likable()
     {
         return $this->morphTo();
+
     }
 }

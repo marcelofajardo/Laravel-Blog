@@ -2,9 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
-use App\Like;
-
 trait Likable
 {
 

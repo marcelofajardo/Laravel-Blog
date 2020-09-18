@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\models\User;
 use App\models\Post;
 use App\models\Comment;
+use App\models\Hero;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,10 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)
-          ->has(Post::factory()
-            ->hasComments(rand(3,10))
-            ->count(rand(3,5)))
-          ->create();
+      User::factory(5)->create();
+
+        // User::factory(5)
+        //   ->has(Post::factory()
+        //     ->hasComments(rand(3,10))
+        //     ->count(rand(3,5)))
+        //   ->create();
     }
 }

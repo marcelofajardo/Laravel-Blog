@@ -20,6 +20,10 @@
                     <x-jet-nav-link href="/posts" :active="request()->routeIs('posts')">
                         posts
                     </x-jet-nav-link>
+
+                <x-jet-nav-link href="/user/{{auth()->user()->id}}/hero/{{auth()->user()->id}}" :active="request()->routeIs('posts')">
+                        Hero
+                    </x-jet-nav-link>
                 </div>
             </div>
 

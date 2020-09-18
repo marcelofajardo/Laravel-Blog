@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentLikesController;
+use App\Http\Controllers\HeroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::post('/comment/{comment}/like', [CommentLikesController::class, 'store'])->name('comment.like');
     Route::delete('/comment/{comment}/dislike', [CommentLikesController::class, 'destroy'])->name('comment.dislike');
+    Route::resource('user.hero', HeroController::class)->except('index','create','store');
 });

@@ -24,6 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -59,6 +60,17 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->hero()->create();
+        });
+
+    }
+
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -67,5 +79,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function hero()
+    {
+        return $this->hasOne(Hero::class);
     }
 }
