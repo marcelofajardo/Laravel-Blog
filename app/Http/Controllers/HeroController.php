@@ -8,7 +8,6 @@ use App\Models\Hero;
 
 class HeroController extends Controller
 {
-
     /**
      * Display the specified resource.
      *
@@ -43,10 +42,11 @@ class HeroController extends Controller
     public function update(Request $request, Hero $hero)
     {
         //
+        $this->authorize('update',$hero);
         $attributes = $request->validate([
             'bio' => 'required|min:5|max:255'
         ]);
-        $user->hero->update($attributes);
+        $hero->update($attributes);
         return redirect("user/hero/$hero->id");
     }
 }

@@ -25,12 +25,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    // Route::resource('post.comments', PostCommentController::class)->except('index', 'create', 'show','edit', 'update');
-    // Route::resource('posts', PostController::class);
-
-    Route::post('/comment/{comment}/like', [CommentLikesController::class, 'store'])->name('comment.like');
-    Route::delete('/comment/{comment}/dislike', [CommentLikesController::class, 'destroy'])->name('comment.dislike');
-
     Route::resource('user/hero', HeroController::class)->except('index','create','store');
     Route::resource('hero.post',HeroPostController::class)->except('index');
 
@@ -39,4 +33,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('hero/{hero}/post/{post}/comments/{comment}/edit', [HeroPostCommentController::class,'edit'])->name('hero.post.comments.edit');
     Route::put('hero/{hero}/post/{post}/comments/{comment}', [HeroPostCommentController::class,'update'])->name('hero.post.comments.update');
+
+    Route::post('/comment/{comment}/like', [CommentLikesController::class, 'store'])->name('comment.like');
+    Route::delete('/comment/{comment}/dislike', [CommentLikesController::class, 'destroy'])->name('comment.dislike');
 });
+
+// Route::resource('hubs', HubController::class);

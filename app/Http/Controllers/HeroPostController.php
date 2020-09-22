@@ -38,6 +38,8 @@ class HeroPostController extends Controller
 
     public function Update(Request $request, Hero $hero, Post $post)
     {
+        $this->authorize('post-update', $post);
+
         $attributes = $request->validate([
             'title' => 'nullable|min:5|max:255',
             'body' => 'required|min:5|max:255',
@@ -55,6 +57,7 @@ class HeroPostController extends Controller
 
     public function destroy(Hero $hero, Post $post)
     {
+        $this->authorize('post-delete', $post);
         $post->delete();
         return redirect('/user/hero/'.$hero->id);
     }

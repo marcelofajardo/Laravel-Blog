@@ -1,11 +1,11 @@
 {{-- edit/delete --}}
 <div class="flex justify-end text-xs">
-  @can('update-comment', $comment)
+  @can('comment-update', $comment)
   <a class="mr-2 text-blue-400 hover:text-blue-500"
     href="{{route('hero.post.comments.edit', [$hero->id, $post->id, $comment->id])}}">Edit</a>
   @endcan
 
-  @can('delete-comment', $comment)
+  @can('comment-delete', $comment)
   <a class="text-red-400" href="#"
     onclick="event.preventDefault();document.querySelector('#deleteComment-{{$comment->id}}').submit()">Delete</a>
   <form id="deleteComment-{{$comment->id}}" class="hidden"

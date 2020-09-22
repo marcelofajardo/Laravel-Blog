@@ -12,12 +12,13 @@ class HeroPostCommentController extends Controller
 {
     public function edit(Hero $hero, Post $post, Comment $comment)
     {
-        // $this->authorize('update-comment', $comment);
         return view('hero.edit-comment', compact('hero', 'post', 'comment'));
     }
 
     public function update(Hero $hero, Post $post, Comment $comment)
     {
+        $this->authorize('comment-update', $comment);
+
         $attributes = request()->validate([
             'body' => 'required|min:5|max:255'
         ]);

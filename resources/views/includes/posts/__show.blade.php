@@ -54,9 +54,17 @@
             </span>
         </div>
         <div class="text-xs">
+            @can('post-update', $post)
             <a class="mr-1 text-blue-400" href="{{route($url.'.edit', [$model->id, $post->id])}}">Edit</a>
-            <a class="text-red-400" href="#"
-                onclick="event.preventDefault();document.querySelector('#deletePost-{{$post->id}}').submit()">Delete</a>
+            @endcan
+            @can('post-delete', $post)
+            <a
+                class="text-red-400" href="#"
+                onclick="event.preventDefault();
+                document.querySelector('#deletePost-{{$post->id}}').submit()"
+            >Delete
+            </a>
+            @endcan
             <form id="deletePost-{{$post->id}}" class="hidden"
                 action="{{route($url.'.destroy', [$model->id, $post->id])}}" method="POST">
                 @method('DELETE')
