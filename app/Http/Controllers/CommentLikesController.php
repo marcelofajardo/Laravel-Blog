@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class CommentLikesController extends Controller
 {
@@ -13,6 +13,7 @@ class CommentLikesController extends Controller
         $comment->like();
         return back();
     }
+
     public function destroy(Comment $comment)
     {
         $comment->dislike();

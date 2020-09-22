@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Hero;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class HeroPostController extends Controller
 {
@@ -35,6 +35,7 @@ class HeroPostController extends Controller
     {
         return view('hero.edit-post', compact('hero', 'post'));
     }
+
     public function Update(Request $request, Hero $hero, Post $post)
     {
         $attributes = $request->validate([

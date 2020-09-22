@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hero;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Hero;
 
 class HeroController extends Controller
 {
