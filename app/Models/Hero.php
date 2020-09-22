@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\Postable;
+
 class Hero extends Model
 {
-    use HasFactory;
+    use HasFactory, Postable;
 
     protected $fillable = ['bio'];
     protected $with = ['user'];
@@ -17,13 +19,10 @@ class Hero extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getAvatarAttribute()
-    {
-        return $this->user->profile_photo_url;
-    }
-
     public function path($append = 'index')
     {
-        return route("user.hero.{$append}", [$this->user->id, $this->id]);
+        return route("hero.{$append}", [$this->id]);
     }
+
+
 }

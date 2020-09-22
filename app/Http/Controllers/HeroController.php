@@ -40,13 +40,13 @@ class HeroController extends Controller
      * @param  \App\Models\Hero  $hero
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, Hero $hero)
+    public function update(Request $request, Hero $hero)
     {
         //
         $attributes = $request->validate([
             'bio' => 'required|min:5|max:255'
         ]);
         $user->hero->update($attributes);
-        return redirect("/user/$user->id/hero/$hero->id");
+        return redirect("user/hero/$hero->id");
     }
 }

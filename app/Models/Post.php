@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+use App\Traits\Commentable;
+
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Commentable;
 
-    protected $fillable= ['title','body','user_id'];
+    protected $fillable= ['title','body','user_id','image'];
     protected $with = ['user'];
 
     public function user()
@@ -18,29 +20,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function getPostImageAttribute()
     {
-        return $this->morphMany('App\Models\Comment', 'commentable');
-    }
-
-    public function path($append = 'index')
-    {
-        return route("posts.{$append}", $this->id);
-    }
-
-    public function setTitleAttribute($value)
-    {
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = Str::slug($value, '-');
-    }
-
-    public function getCreatedDateAttribute()
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getCommentsCountAttribute()
-    {
-        return $this->comments()->count();
+        return 'http://127.0.0.1:8000/storage/'. $this->image;
     }
 }
