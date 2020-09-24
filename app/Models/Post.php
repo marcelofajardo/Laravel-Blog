@@ -12,14 +12,17 @@ class Post extends Model
 {
     use HasFactory, Commentable;
 
-    protected $fillable= ['title','body','user_id','image'];
-    protected $with = ['user'];
+    protected $fillable= ['body','user_id','image'];
 
-    public function user()
+    public function postable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
+    public function path($append = "index")
+    {
+        return route("post.$append", $this->id);
+    }
     public function getPostImageAttribute()
     {
         return 'http://127.0.0.1:8000/storage/'. $this->image;

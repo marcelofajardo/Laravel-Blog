@@ -1,5 +1,5 @@
 @if ($errors->any())
-<div class="my-1 text-red-500 text-xs italic">
+<div class="mt-2 mb-1 text-red-500 text-xs italic">
   @foreach ($errors->all() as $message)
   <p>{{ $message }}</p>
   @endforeach

@@ -9,14 +9,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class HeroPolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Hero  $hero
-     * @return mixed
-     */
     public function update(User $user, Hero $hero)
     {
         //

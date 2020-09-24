@@ -22,7 +22,7 @@
 
   <a class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
     border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-    href="#">Edit Profile
+    href="{{$hero->path('edit')}}">Edit Profile
   </a>
 </div>
 

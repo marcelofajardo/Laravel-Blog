@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,21 +11,13 @@ use Illuminate\Http\Request;
  */
 class PostCommentController extends Controller
 {
-    public function store(Request $request, Post $post)
+    public function __invoke(Request $request, Post $post)
     {
-        $attribute = $request->validate([
-            'body' => 'required|min:5'
-            ]);
-        $attribute['user_id'] = auth()->user()->id;
-        $post->comments()->create($attribute);
-
-        return back();
-    }
-
-    public function destroy(Post $post, Comment $comment)
-    {
-        $this->authorize('comment-delete', $comment);
-        $comment->delete();
+        $attributes = $request->validate([
+            'body' => 'required|min:5|max:255'
+        ]);
+        $attributes['user_id'] = auth()->user()->id();
+        $post->comments()->create($attributes);
         return back();
     }
 }

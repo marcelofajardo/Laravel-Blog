@@ -19,11 +19,6 @@ class Hero extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'user_id');
-    }
-
     public function path($append = 'index')
     {
         return route("hero.{$append}", [$this->id]);
@@ -32,5 +27,13 @@ class Hero extends Model
     public function getAvatarAttribute()
     {
         return $this->user->profile_photo_url;
+    }
+    public function getNameAttribute()
+    {
+        return $this->user->name;
+    }
+    public function getUsernameAttribute()
+    {
+        return $this->user->username;
     }
 }

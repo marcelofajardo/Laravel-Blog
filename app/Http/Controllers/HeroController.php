@@ -7,45 +7,26 @@ use App\Models\Hero;
 
 class HeroController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Hero  $hero
-     * @return \Illuminate\Http\Response
-     */
     public function show(Hero $hero)
     {
-        //
         $posts = $hero->posts;
-        return view('hero.show', compact('hero','posts'));
+        return view('hero.show', compact('hero', 'posts'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Hero  $hero
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Hero $hero)
     {
-        //
+        $this->authorize('update', $hero);
         return view('hero.edit', compact('hero'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hero  $hero
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Hero $hero)
     {
-        //
-        $this->authorize('update',$hero);
+        $this->authorize('update', $hero);
+
         $attributes = $request->validate([
-            'bio' => 'required|min:5|max:255'
+            'bio' => 'required|min:5'
         ]);
+
         $hero->update($attributes);
         return redirect("user/hero/$hero->id");
     }

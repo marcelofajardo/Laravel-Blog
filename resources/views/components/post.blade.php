@@ -1,6 +1,7 @@
-<p class="text-xs text-gray-700 mb-2">
+<p class="text-xs text-gray-700">
   <a class="font-semibold hover:text-blue-400"
-    href="#">{{'@'.$post->user->username}}</a> &bull;
+    href="#">{{'@'.$post->postable->username}}</a>
+  &bull;
   Posted {{$post->created_at->diffForHumans()}}
 </p>
 
@@ -11,7 +12,7 @@
 @endif
 
 <p class="px-2 mb-2 text-sm text-gray-900">
-  {{$post->body}}
+  {{ Str::limit($post->body, 250) }}
 </p>
 
 <div class="flex px-2 text-xs text-gray-700">
@@ -36,7 +37,6 @@
   </p>
   <p
     class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">
-    5
     <a href="#">Comments</a>
   </p>
   <p
@@ -45,7 +45,7 @@
     <a href="#">Views</a>
   </p>
   <a class="ml-auto text-sm text-blue-700 hover:underline hover:text-blue-800"
-    href="#">Read More
+    href="{{$post->path('show')}}">Read More
     <span>&rarr;</span>
   </a>
 </div>

@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HeroController;
+use App\Http\Controllers\HeroPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentController;
@@ -18,18 +19,32 @@ use App\Http\Controllers\CommentLikeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// TODO: post/comment => edit/delete
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+    // HERO
+    Route::get('/user/hero/{hero}', [HeroController::class, 'show'])->name('hero.show');
+    Route::get('/user/hero/{hero}/edit', [HeroController::class, 'edit'])->name('hero.edit');
+    Route::put('/user/hero/{hero}', [HeroController::class, 'update'])->name('hero.update');
 
-    Route::resource('user/hero', HeroController::class)->only('show', 'edit', 'update');
-    Route::resource('post', PostController::class)->except('index', 'create');
-    Route::resource('post.comments', PostCommentController::class)->only('store');
-    Route::resource('comment', CommentController::class)->only('edit', 'update', 'delete');
+    // POST
+    Route::post('/hero/{hero}/post', HeroPostController::class)->name('hero.post.store');
+
+    Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/post/{post}', [PostController::class, 'update'])->name('post.update');
+    Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
+    // COMMENT
+    Route::post('/post/{post}/comment', PostCommentController::class,)->name('post.comment.store');
+
+    Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+    Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+    Route::delete('/comment/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
 
     // LIKE
     Route::post('/post/{post}/like', [PostLikeController::class, 'store'])->name('comment.like');

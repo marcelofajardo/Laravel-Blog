@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Hero;
 use App\Models\Post;
+use App\Models\Hero;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -25,9 +24,6 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
-            'user_id' => User::pluck('id')->random(),
-            // 'title' => rtrim($this->faker->sentence(5,10),'.'),
             'body' => $this->faker->paragraph(),
             'views_count' => $this->faker->randomDigit,
             'postable_id' => Hero::pluck('id')->random(),
