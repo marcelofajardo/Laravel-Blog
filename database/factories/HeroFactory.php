@@ -25,7 +25,7 @@ class HeroFactory extends Factory
     {
         return [
             //
-            'bio' => $this->faker->sentence()
+            'bio' => $this->faker->paragraph()
         ];
     }
 }

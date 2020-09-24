@@ -27,7 +27,7 @@ class PostFactory extends Factory
         return [
             //
             'user_id' => User::pluck('id')->random(),
-            'title' => rtrim($this->faker->sentence(5,10),'.'),
+            // 'title' => rtrim($this->faker->sentence(5,10),'.'),
             'body' => $this->faker->paragraph(),
             'views_count' => $this->faker->randomDigit,
             'postable_id' => Hero::pluck('id')->random(),

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('user_id');
             $table->string('postable_id');
             $table->string('postable_type');
-            $table->string('title')->nullable();
+            // $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->text('body');
             $table->unsignedBigInteger('views_count')->default(0);

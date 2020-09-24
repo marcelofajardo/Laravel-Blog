@@ -1,4 +1,4 @@
-@switch($model)
+{{-- @switch($model)
   @case($model instanceOf App\Models\Hero)
     @php
     $url = 'hero.post';
@@ -6,7 +6,7 @@
     @break
 
   @default
-@endswitch
+@endswitch --}}
 
 <div>
   @if ($post->image)
@@ -51,7 +51,7 @@
     </div>
 
     <div class="text-right">
-      <a href="{{route($url.'.show', [$model->id, $post->id])}}" class="py-2 text-indigo-600 text-xs uppercase hover:underline"> Read More <span>&rarr;</span> </a>
+      {{-- <a href="{{route($url.'.show', [$model->id, $post->id])}}" class="py-2 text-indigo-600 text-xs uppercase hover:underline"> Read More <span>&rarr;</span> </a> --}}
     </div>
   </div>
 </div>

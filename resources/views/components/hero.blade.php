@@ -14,7 +14,7 @@
     <p class="text-sm text-blue-400">@Lipsum</p>
     <h2 class="font-bold my-1">
       {{$hero->user->name}}</h2>
-    <p class="text-sm text-gray-700">
+    <p class="text-xs text-gray-700">
       Joined
       {{$hero->created_at->diffForHumans()}}
     </p>
@@ -26,14 +26,8 @@
   </a>
 </div>
 
-<p class="text-sm text-gray-600">
-  {{-- {{$hero->bio ?? "Update your bio.."}} --}}
-  Lorem, ipsum dolor sit amet consectetur
-  adipisicing elit. Odio voluptate natus, expedita
-  corrupti laudantium, eveniet hic odit minima
-  accusantium reiciendis mollitia vitae quae.
-  Saepe possimus cupiditate nemo neque voluptatem
-  quia!
+<p class="mb-6 text-sm text-gray-600">
+  {{$hero->bio ?? "Update your bio.."}}
 </p>
 
 

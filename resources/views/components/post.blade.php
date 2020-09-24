@@ -1,6 +1,6 @@
-<p class="text-sm text-gray-700 mb-2">
+<p class="text-xs text-gray-700 mb-2">
   <a class="font-semibold hover:text-blue-400"
-    href="#">{{'@'.$post->user->id}}</a> &bull;
+    href="#">{{'@'.$post->user->username}}</a> &bull;
   Posted {{$post->created_at->diffForHumans()}}
 </p>
 
@@ -16,9 +16,10 @@
 
 <div class="flex px-2 text-xs text-gray-700">
   <p
-    class="border border-gray-400 rounded-full px-3">
+    class="border border-gray-400 rounded-full px-3 flex items-center
+      cursor-pointer hover:text-blue-400 hover:border-blue-400">
     12
-    <a href="#">
+    <a class="ml-1 mb-1" href="#">
       <svg viewBox="0 0 20 20" class="w-3">
         <g id="Page-1" stroke="none"
           stroke-width="1" fill="none"
@@ -34,7 +35,7 @@
     </a>
   </p>
   <p
-    class="mx-2 border border-gray-400 rounded-full px-3">
+    class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">
     5
     <a href="#">Comments</a>
   </p>

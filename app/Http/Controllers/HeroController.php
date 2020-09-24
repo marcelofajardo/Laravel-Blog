@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Hero;
 
 class HeroController extends Controller
@@ -14,10 +13,11 @@ class HeroController extends Controller
      * @param  \App\Models\Hero  $hero
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Hero $hero)
+    public function show(Hero $hero)
     {
         //
-        return view('hero.show', compact('hero'));
+        $posts = $hero->posts;
+        return view('hero.show', compact('hero','posts'));
     }
 
     /**
@@ -26,7 +26,7 @@ class HeroController extends Controller
      * @param  \App\Models\Hero  $hero
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, Hero $hero)
+    public function edit(Hero $hero)
     {
         //
         return view('hero.edit', compact('hero'));
