@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Hero::class);
     }
+
+    public function isAdmin()
+    {
+        return false;
+    }
 }

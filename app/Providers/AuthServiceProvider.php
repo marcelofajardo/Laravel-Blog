@@ -6,11 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 
 use App\Policies\PostPolicy;
-use App\Policies\PostCommentPolicy;
-
-use App\Models\User;
-use App\Models\Post;
-use App\Models\Comment;
+use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,6 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Hero::class => HeroPolicy::class,
+        Post::class => PostPolicy::class,
+        Comment::class => CommentPolicy::class,
     ];
 
     /**
@@ -31,22 +29,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        // POST
-        Gate::define('post-update', function (User $user, Post $post) {
-            return $user->id === $post->user_id;
-        });
-
-        Gate::define('post-delete', function (User $user, Post $post) {
-            return $user->id === $post->user_id;
-        });
-
-        // COMMENT
-        Gate::define('comment-update', function (User $user, Comment $comment) {
-            return $user->id === $comment->user_id;
-        });
-
-        Gate::define('comment-delete', function (User $user, Comment $comment) {
-            return $user->id === $comment->user_id;
+        Gate::before(function ($user, $ability) {
+            if ($user->isAdmin()) {
+                return true;
+            }
         });
     }
 }

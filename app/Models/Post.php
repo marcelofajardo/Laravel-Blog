@@ -23,6 +23,7 @@ class Post extends Model
     {
         return route("post.$append", $this->id);
     }
+
     public function getPostImageAttribute()
     {
         return 'http://127.0.0.1:8000/storage/'. $this->image;

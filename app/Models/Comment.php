@@ -24,6 +24,11 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function path($append = "index")
+    {
+        return route("comment.$append", $this->id);
+    }
+
     public function getlikesCountAttribute()
     {
         $likes = $this->likes()->where('liked', true)->with('like')->count();

@@ -1,6 +1,6 @@
 <p class="text-xs text-gray-700">
   <a class="font-semibold hover:text-blue-400"
-    href="#">{{'@'.$post->postable->username}}</a>
+  href="#">{{'@'.$post->postable->username}}</a>
   &bull;
   Posted {{$post->created_at->diffForHumans()}}
 </p>
@@ -37,6 +37,7 @@
   </p>
   <p
     class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">
+    {{ $post->comments()->count() }}
     <a href="#">Comments</a>
   </p>
   <p

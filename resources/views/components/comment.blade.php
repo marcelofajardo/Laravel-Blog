@@ -2,7 +2,7 @@
   <div
     class="flex justify-between items-center flex-col px-4 text-sm text-gray-700">
     <a class="hover:text-blue-700" href="#"><svg
-        viewBox="0 0 20 20" class="w-5">
+        viewBox="0 0 20 20" class="w-4">
         <g id="Page-1" stroke="none"
           stroke-width="1" fill="none"
           fill-rule="evenodd">
@@ -13,13 +13,16 @@
             </path>
           </g>
         </g>
-      </svg></a>
+      </svg>
+    </a>
+
     <p
       class="my-2 {{ $comment->likes_count < 0 ? 'text-red-500' : 'text-green-500'}} ">
       {{$comment->likes_count ?? 0}}
     </p>
+
     <a href="#" class="hover:text-blue-700"><svg
-        viewBox="0 0 20 20" class="w-5">
+        viewBox="0 0 20 20" class="w-4">
         <g id="Page-1" stroke="none"
           stroke-width="1" fill="none"
           fill-rule="evenodd">
@@ -30,10 +33,13 @@
             </path>
           </g>
         </g>
-      </svg></a>
-    <span
-      class="mt-4 bg-gray-300 h-full w-1"></span>
+      </svg>
+    </a>
+
+    <span class="mt-4 bg-gray-300 h-full w-1">
+    </span>
   </div>
+
   <div>
     <p class="mb-2 text-gray-700 text-sm">
       Lorem ipsum dolor sit amet consectetur
@@ -43,10 +49,39 @@
       ipsam natus aperiam hic porro expedita illo,
       veniam ratione quas!
     </p>
-    <p class="text-xs text-gray-700">
-      <a class="font-bold hover:text-blue-400"
-        href="#">@Lipsum</a>
-      &bull; 3 mins ago
-    </p>
+    <div
+      class="flex justify-between items-center">
+      <p class="text-xs text-gray-700">
+        <a class="font-bold hover:text-blue-400"
+          href="#">@Lipsum
+        </a>
+        &bull; 3 mins ago
+
+      </p>
+      <div class="text-xs">
+        @can('update', $comment)
+        <a class="text-blue-400
+      hover:text-blue-500 hover:underline mr-1"
+          href="{{ $comment->path('edit')}}">Edit
+        </a>
+        @endcan
+
+        @can('delete', $comment)
+        <a class="text-red-400
+                    hover:text-red-500 hover:underline"
+          href="#"
+          onclick="event.preventDefault();
+                                    document.querySelector('#deletePost-{{$comment->id}}').submit()">delete
+        </a>
+        <form id="deletePost-{{$comment->id}}"
+          class="hidden"
+          action="{{$comment->path('destroy')}}"
+          method="POST">
+          @csrf
+          @method('DELETE')
+        </form>
+        @endcan
+      </div>
+    </div>
   </div>
 </div>

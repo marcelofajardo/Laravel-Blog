@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
     Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
-    Route::delete('/comment/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     // LIKE
     Route::post('/post/{post}/like', [PostLikeController::class, 'store'])->name('comment.like');
