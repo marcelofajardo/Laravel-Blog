@@ -1,7 +1,9 @@
 <div class="flex">
   <div
     class="flex justify-between items-center flex-col px-4 text-sm text-gray-700">
-    <a class="hover:text-blue-700" href="#"><svg
+    <a class="hover:text-blue-700" href="#"
+      onclick="event.preventDefault();
+        document.querySelector('#likeForm-{{$comment->id}}').submit()"><svg
         viewBox="0 0 20 20" class="w-4">
         <g id="Page-1" stroke="none"
           stroke-width="1" fill="none"
@@ -21,7 +23,9 @@
       {{$comment->likes_count ?? 0}}
     </p>
 
-    <a href="#" class="hover:text-blue-700"><svg
+    <a href="#" class="hover:text-blue-700"
+      onclick="event.preventDefault();
+        document.querySelector('#dislikeForm-{{$comment->id}}').submit()"><svg
         viewBox="0 0 20 20" class="w-4">
         <g id="Page-1" stroke="none"
           stroke-width="1" fill="none"
@@ -38,6 +42,20 @@
 
     <span class="mt-4 bg-gray-300 h-full w-1">
     </span>
+
+    <form id="likeForm-{{$comment->id}}"
+      class="hidden"
+      action="{{$comment->path('like')}}"
+      method="POST">
+      @csrf
+    </form>
+    <form id="dislikeForm-{{$comment->id}}"
+      class="hidden"
+      action="{{$comment->path('dislike')}}"
+      method="POST">
+      @csrf
+      @method("DELETE")
+    </form>
   </div>
 
   <div class="w-full">

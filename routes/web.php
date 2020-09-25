@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     // LIKE
-    Route::post('/post/{post}/like', [PostLikeController::class, 'store'])->name('comment.like');
+    Route::post('/post/{post}/like', [PostLikeController::class, 'store'])->name('post.like');
     Route::post('/comment/{comment}/like', [CommentLikeController::class, 'store'])->name('comment.like');
     Route::delete('/comment/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
 

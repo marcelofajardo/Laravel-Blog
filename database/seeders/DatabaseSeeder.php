@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use App\models\User;
 use App\models\Post;
 use App\models\Comment;
-use App\models\Hero;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->hasHero()->create();
 
         Post::factory(15)
-          ->hasComments(3)
+          ->hasComments(rand(3,7))
           ->create();
     }
 }

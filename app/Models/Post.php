@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 use App\Traits\Commentable;
+use App\Traits\Likable;
 
 class Post extends Model
 {
-    use HasFactory, Commentable;
+    use HasFactory, Commentable, Likable;
 
     protected $fillable= ['body','user_id','image'];
 

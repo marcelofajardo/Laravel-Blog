@@ -27,6 +27,11 @@ trait Likable
         return $this->like(false);
     }
 
+    public function toggleLike()
+    {
+        $this->likes()->toggle($this);
+    }
+
     public function isLiked(User $user)
     {
         return (bool) $this->likes()

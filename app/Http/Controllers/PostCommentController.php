@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
-/**
- * TODO:
- * Use Livewire or JS for DRY approach
- */
 class PostCommentController extends Controller
 {
     public function __invoke(Request $request, Post $post)
