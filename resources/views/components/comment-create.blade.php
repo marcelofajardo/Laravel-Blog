@@ -1,4 +1,4 @@
-<form action="#"
+<form action="{{$post->path('comment.store')}}"
   method="POST">
   @csrf
 
@@ -13,8 +13,9 @@
 
   <div class="mb-6 text-right">
     <button class="px-8 py-2 text-sm rounded text-white bg-blue-500
-        focus:outline-none hover:bg-blue-400">
-      Comment
+        focus:outline-none hover:bg-blue-400"
+        type="submit"
+    >Comment
     </button>
   </div>
 </form>

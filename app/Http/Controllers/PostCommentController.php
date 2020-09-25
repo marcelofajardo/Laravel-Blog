@@ -16,7 +16,9 @@ class PostCommentController extends Controller
         $attributes = $request->validate([
             'body' => 'required|min:5|max:255'
         ]);
-        $attributes['user_id'] = auth()->user()->id();
+
+        $attributes['user_id'] = auth()->user()->id;
+
         $post->comments()->create($attributes);
         return back();
     }

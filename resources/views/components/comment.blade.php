@@ -40,20 +40,15 @@
     </span>
   </div>
 
-  <div>
+  <div class="w-full">
     <p class="mb-2 text-gray-700 text-sm">
-      Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Voluptate
-      obcaecati commodi corporis molestias aut a,
-      sapiente at maxime! Sunt cum
-      ipsam natus aperiam hic porro expedita illo,
-      veniam ratione quas!
+      {{ $comment->body }}
     </p>
     <div
       class="flex justify-between items-center">
       <p class="text-xs text-gray-700">
         <a class="font-bold hover:text-blue-400"
-          href="#">@Lipsum
+          href="#">{{ '@'.$comment->user->name }}
         </a>
         &bull; 3 mins ago
 

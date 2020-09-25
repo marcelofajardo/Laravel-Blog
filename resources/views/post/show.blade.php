@@ -91,6 +91,6 @@
       </x-comment>
     </div>
     @endforeach
-    <x-comment-create></x-comment-create>
+    <x-comment-create :post="$post"></x-comment-create>
   </div>
 </x-master>

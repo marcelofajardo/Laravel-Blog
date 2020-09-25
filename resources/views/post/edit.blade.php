@@ -19,7 +19,7 @@
       <div class="mb-6">
         <button class="px-8 py-2 text-sm rounded text-white bg-blue-500
         focus:outline-none hover:bg-blue-400">
-          Update
+          Update Post
         </button>
       </div>
     </form>

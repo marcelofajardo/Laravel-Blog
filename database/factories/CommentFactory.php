@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Hero;
+use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,6 +25,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => User::pluck('id')->random(),
             'commentable_id' => Post::pluck('id')->random(),
             'commentable_type' => 'App\Models\Post',
             'body' => $this->faker->paragraph()
