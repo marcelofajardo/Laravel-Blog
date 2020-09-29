@@ -12,7 +12,7 @@ class Comment extends Model
     use HasFactory, likable;
 
     protected $fillable= ['body', 'user_id'];
-    protected $with = ['user'];
+    protected $with = ['commentable'];
 
     public function commentable()
     {

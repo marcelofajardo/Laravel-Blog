@@ -14,6 +14,7 @@ class Post extends Model
     use HasFactory, Commentable, Likable;
 
     protected $fillable= ['body','user_id','image'];
+    protected $with = ['postable'];
 
     public function postable()
     {

@@ -13,6 +13,13 @@ trait Likable
 
     public function like($liked = true)
     {
+        if ($this->isLiked($liked)) {
+            return $this->likes()
+                ->where('user_id', auth()->user()->id)
+                ->where('liked', $liked)
+                ->delete();
+        }
+
         $this->likes()->updateOrCreate(
             [
               'user_id' => auth()->id(),
@@ -27,24 +34,16 @@ trait Likable
         return $this->like(false);
     }
 
-    public function toggleLike()
-    {
-        $this->likes()->toggle($this);
-    }
-
-    public function isLiked(User $user)
+    public function isLiked($liked = true)
     {
         return (bool) $this->likes()
-            ->where('user_id', $user->id)
-            ->where('liked', true)
+            ->where('user_id', auth()->user()->id)
+            ->where('liked', $liked)
             ->count();
     }
 
-    public function isDisliked(User $user)
+    public function isDisliked()
     {
-        return (bool) $this->likes()
-            ->where('user_id', $user->id)
-            ->where('liked', false)
-            ->count();
+        return $this->isLiked(false);
     }
 }

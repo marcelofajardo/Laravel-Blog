@@ -1,7 +1,7 @@
 <div class="flex">
   <div
     class="flex justify-between items-center flex-col px-4 text-sm text-gray-700">
-    <a class="hover:text-blue-700" href="#"
+<a class="hover:text-blue-700 {{! $comment->isLiked() ?: 'text-blue-700'}}" href="#"
       onclick="event.preventDefault();
         document.querySelector('#likeForm-{{$comment->id}}').submit()"><svg
         viewBox="0 0 20 20" class="w-4">
@@ -23,7 +23,7 @@
       {{$comment->likes_count ?? 0}}
     </p>
 
-    <a href="#" class="hover:text-blue-700"
+    <a href="#" class="hover:text-red-700 {{! $comment->isDisliked() ?: 'text-red-700'}}"
       onclick="event.preventDefault();
         document.querySelector('#dislikeForm-{{$comment->id}}').submit()"><svg
         viewBox="0 0 20 20" class="w-4">

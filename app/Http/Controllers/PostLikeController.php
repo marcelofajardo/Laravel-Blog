@@ -11,7 +11,7 @@ class PostLikeController extends Controller
     {
         // like
         // remove like
-        $post->toggleLike();
+        $post->like();
         return back();
     }
 }
