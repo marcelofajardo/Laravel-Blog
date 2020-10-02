@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\User;
+use App\Notifications\Liked;
 
 trait Likable
 {
@@ -22,11 +23,12 @@ trait Likable
 
         $this->likes()->updateOrCreate(
             [
-              'user_id' => auth()->id(),
-              'likable_id' => $this->id
+                'user_id' => auth()->id(),
+                'likable_id' => $this->id
             ],
             [ 'liked' => $liked ]
         );
+        return auth()->user()->notify(new Liked(auth()->user()));
     }
 
     public function dislike()
