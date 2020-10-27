@@ -50,11 +50,12 @@
     </p>
 
     <div
-      class="flex px-2 text-xs text-gray-700 mb-6">
-      <a href="#"
-        class="flex items-center px-3 border border-gray-400 rounded-full
-        hover:text-blue-400 hover:border-blue-400
-        {{! $post->isLiked() ?: 'text-blue-700'}}"
+    class="flex px-2 text-xs text-gray-700 mb-6">
+
+      <a href="#" class="flex items-center px-3 border border-gray-400 rounded-full
+      hover:text-blue-400 hover:border-blue-400
+      {{ $post->postable->id !== auth()->user()->id ?: 'cursor-not-allowed' }}
+      {{! $post->isLiked() ?: 'text-blue-700'}}"
         onclick="event.preventDefault();
           document.querySelector('#postLikeForm').submit()">
 
@@ -75,11 +76,13 @@
           </g>
         </svg>
       </a>
+      @can('like', $post)
       <form id="postLikeForm"
         action="{{$post->path('like')}}"
         method="POST">
         @csrf
       </form>
+      @endcan
 
       <p
         class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">

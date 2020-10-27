@@ -29,10 +29,16 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
         Gate::before(function ($user, $ability) {
             if ($user->isAdmin()) {
                 return true;
             }
         });
+
+        Gate::define('like', function ($user, $post) {
+            // dd($post);
+        return $user->id === $post->id;
+    });
     }
 }
