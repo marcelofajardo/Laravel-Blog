@@ -53,6 +53,18 @@ class PostTest extends TestCase
         $response->assertRedirect('/user/hero/'. $attr['user']->hero->id);
     }
 
+    /** @test */
+    public function post_store_comment()
+    {
+        $attr = $this->createPost();
+        $response = $this->actingAs($attr['user'])
+            ->post('/post/'. $attr['post']->id .'/comment', [
+                'body' => 'Lorem Ipsum'
+            ]);
+        $this->assertDatabaseCount('comments', 1);
+        // $response->assertRedirect('/posts/'. $attr['post']->id);
+
+    }
     public function createPost()
     {
         $user = User::factory()->create();
