@@ -19,7 +19,9 @@ use App\Http\Controllers\CommentLikeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// TODO: post/comment => edit/delete
+
+// Auth::login(App\Models\User::first());
+
 Route::get('/', function () {
     return view('welcome');
 });
