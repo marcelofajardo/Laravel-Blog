@@ -63,8 +63,27 @@ class PostTest extends TestCase
             ]);
         $this->assertDatabaseCount('comments', 1);
         // $response->assertRedirect('/posts/'. $attr['post']->id);
-
     }
+
+    /** @test */
+    public function hero_like_post()
+    {
+        $attr = $this->createPost();
+        $response = $this->actingAs($attr['user'])
+            ->post('/post/'. $attr['post']->id .'/like');
+        $this->assertDatabaseCount('likes', 1);
+        return $attr;
+    }
+
+    /** @test */
+    public function hero_unlike_post()
+    {
+        $attr = $this->hero_like_post();
+        $response = $this->actingAs($attr['user'])
+            ->post('/post/'. $attr['post']->id .'/like');
+        $this->assertDatabaseCount('likes', 0);
+    }
+
     public function createPost()
     {
         $user = User::factory()->create();
