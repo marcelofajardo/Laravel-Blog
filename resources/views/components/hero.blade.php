@@ -26,16 +26,7 @@
     >Edit Profile
   </a>
   @else
-  <a href="#"
-    class="px-5 py-2 mt-4 text-xs font-semibold text-blue-400
-    border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-    onclick="event.preventDefault(); document.querySelector('#follow').submit();
-  ">
-    {{auth()->user()->following->contains($hero) ? 'Unfollow' : 'follow'}}
-  </a>
-  <form id="follow" action="{{route('hero.follow', $hero->id)}}" method="POST" class="hidden">
-    @csrf
-  </form>
+ @livewire('follow-button', ['hero'=> $hero])
 @endif
 </div>
 

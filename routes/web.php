@@ -8,7 +8,7 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
-use App\Http\Controllers\HeroFollowController;
+use App\Http\Livewire\FollowButton;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/comment/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
 
     // FOLLOW
-    Route::post('/hero/{hero}/follow', HeroFollowController::class)->name('hero.follow');
+    Route::post('/hero/{hero}/follow', FollowButton::class)->name('hero.follow');
 
     Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
     Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);
