@@ -80,8 +80,8 @@ class User extends Authenticatable
         return $this->hasOne(Hero::class);
     }
 
-    public function isAdmin()
+    public function following()
     {
-        return false;
+        return $this->belongsToMany(Hero::class);
     }
 }

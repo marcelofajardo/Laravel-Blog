@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
     // COMMENT
-    Route::post('/post/{post}/comment', PostCommentController::class,)->name('post.comment.store');
+    Route::post('/post/{post}/comment', PostCommentController::class, )->name('post.comment.store');
 
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
     Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
@@ -52,6 +52,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/post/{post}/like', [PostLikeController::class, 'store'])->name('post.like');
     Route::post('/comment/{comment}/like', [CommentLikeController::class, 'store'])->name('comment.like');
     Route::delete('/comment/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
+
+    // FOLLOW
+    Route::post('/hero/{hero}/follow', HeroUserController::class)->name('hero.follow');
 
     // Route::view('/hubs', 'hubs', ['post' => Post::latest()->paginate(20)]);
 });
