@@ -13,27 +13,29 @@
   <div class="p-2" style="max-width: 150px">
     <p class="text-sm text-blue-400">@Lipsum</p>
     <h2 class="font-bold my-1">
-      {{$hero->user->name}}</h2>
+      {{$hero->user->name}}
+    </h2>
     <p class="text-xs text-gray-700">
-      Joined
-      {{$hero->created_at->diffForHumans()}}
+      Joined {{$hero->created_at->diffForHumans()}}
     </p>
   </div>
-@if (auth()->user()->id !== $hero->id)
-<a class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
-border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-href="{{$hero->path('edit')}}">Edit Profile
-</a>
-@else
-<a href="#"
-class="px-5 py-2 mt-4 text-xs font-semibold text-blue-400
-border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-onclick="event.preventDefault(); document.querySelector('#follow').submit();
-">Follow
-</a>
-<form id="follow" action="{{route('hero.follow', $hero->id)}}" method="POST" class="hidden">
-@csrf
-</form>
+  @if (auth()->user()->id !== $hero->id)
+  <a href="{{$hero->path('edit')}}"
+    class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
+    border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
+    >Edit Profile
+  </a>
+  @else
+  <a href="#"
+    class="px-5 py-2 mt-4 text-xs font-semibold text-blue-400
+    border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
+    onclick="event.preventDefault(); document.querySelector('#follow').submit();
+  ">
+    {{auth()->user()->following->contains($hero) ? 'Unfollow' : 'follow'}}
+  </a>
+  <form id="follow" action="{{route('hero.follow', $hero->id)}}" method="POST" class="hidden">
+    @csrf
+  </form>
 @endif
 </div>
 
