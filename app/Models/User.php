@@ -82,7 +82,7 @@ class User extends Authenticatable
 
     public function following()
     {
-        return $this->belongsToMany(Hero::class);
+        return $this->belongsToMany(Hero::class)->withTimestamps();
     }
 
     public function isAdmin()

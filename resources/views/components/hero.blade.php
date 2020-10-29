@@ -19,11 +19,22 @@
       {{$hero->created_at->diffForHumans()}}
     </p>
   </div>
-
-  <a class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
-    border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-    href="{{$hero->path('edit')}}">Edit Profile
-  </a>
+@if (auth()->user()->id !== $hero->id)
+<a class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
+border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
+href="{{$hero->path('edit')}}">Edit Profile
+</a>
+@else
+<a href="#"
+class="px-5 py-2 mt-4 text-xs font-semibold text-blue-400
+border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
+onclick="event.preventDefault(); document.querySelector('#follow').submit();
+">Follow
+</a>
+<form id="follow" action="{{route('hero.follow', $hero->id)}}" method="POST" class="hidden">
+@csrf
+</form>
+@endif
 </div>
 
 <p class="mb-6 text-sm text-gray-600">
