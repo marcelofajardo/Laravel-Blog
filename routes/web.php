@@ -8,6 +8,7 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\HeroFollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\CommentLikeController;
 |
 */
 
-// Auth::login(App\Models\User::first());
+Auth::login(App\Models\User::first());
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,7 +55,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/comment/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
 
     // FOLLOW
-    Route::post('/hero/{hero}/follow', HeroUserController::class)->name('hero.follow');
+    Route::post('/hero/{hero}/follow', HeroFollowController::class)->name('hero.follow');
 
     // Route::view('/hubs', 'hubs', ['post' => Post::latest()->paginate(20)]);
 });
