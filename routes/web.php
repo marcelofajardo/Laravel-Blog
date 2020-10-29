@@ -20,7 +20,7 @@ use App\Http\Controllers\HeroFollowController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// TODO: Refactor auth middleware
 Auth::login(App\Models\User::first());
 
 Route::get('/', function () {
