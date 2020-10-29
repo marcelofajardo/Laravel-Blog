@@ -57,5 +57,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // FOLLOW
     Route::post('/hero/{hero}/follow', HeroFollowController::class)->name('hero.follow');
 
-    // Route::view('/hubs', 'hubs', ['post' => Post::latest()->paginate(20)]);
+    Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
+    Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);
 });

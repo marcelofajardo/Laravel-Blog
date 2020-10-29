@@ -57,6 +57,14 @@
                 href="/user/hero/{{auth()->user()->id}}">
                 Hero
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link
+                href="/users">
+                users
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link
+                href="/posts">
+                posts
+            </x-jet-responsive-nav-link>
         </div>
     </div>
 </nav>
