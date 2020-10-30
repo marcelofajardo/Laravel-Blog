@@ -1,18 +1,18 @@
-<form action="{{$hero->path('post.store')}}"
+<form wire:submit.prevent="save"
   enctype="multipart/form-data"
   >
   <x-error-box></x-error-box>
 <div class="flex">
-
-  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.7Pw3-aUGna4q6Kn-i1riwQHaJQ%26pid%3DApi&f=1"
-  class="h-32 mr-2 mb-2 rounded"
-  >
-  <div class="mb-6 flex-1">
-    <textarea
+     @if ($image)
+        <img src="{{ $image->temporaryUrl() }}"
+        class="h-32 mr-2 mb-2 rounded"
+        >
+        @endif
+        <div class="mb-6 flex-1">
+    <textarea name="body"
     class="h-32 w-full border px-4 py-2 text-gray-700 leading-tight rounded focus:border-blue-500 focus:shadow-outline outline-none"
-
-    name="body"
     placeholder="Post something...?"
+    wire:model="body"
     >{{ old('body') }}</textarea>
   </div>
 </div>
@@ -25,11 +25,10 @@
     border border-gray-400 rounded hover:border-blue-500 hover:text-blue-700">Upload
     Image
   </label>
-  <input
-  id="file"
+  <input id="file"
   class="hidden"
   type="file"
-  wire:model="photo"
+  wire:model="image"
   />
 
     <button

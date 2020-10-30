@@ -5,8 +5,9 @@
   </div>
 
   <div class="mb-6 p-2 rounded shadow">
-    <x-post-create :hero="$hero">
-    </x-post-create>
+    {{-- <x-post-create :hero="$hero">
+    </x-post-create> --}}
+    @livewire('create-post', ['model' => $hero])
   </div>
 
   <div class="rounded shadow">

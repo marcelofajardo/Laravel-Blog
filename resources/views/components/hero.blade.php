@@ -19,7 +19,7 @@
       Joined {{$hero->created_at->diffForHumans()}}
     </p>
   </div>
-  @if (auth()->user()->id !== $hero->id)
+  @if (auth()->user()->id === $hero->id)
   <a href="{{$hero->path('edit')}}"
     class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
     border border-blue-400 rounded hover:bg-blue-400 hover:text-white"

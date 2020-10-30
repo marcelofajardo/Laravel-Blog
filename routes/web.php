@@ -8,7 +8,10 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
+
+// LIVEWIRE
 use App\Http\Livewire\FollowButton;
+use App\Http\Livewire\CreatePost;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +24,8 @@ use App\Http\Livewire\FollowButton;
 |
 */
 // TODO: Refactor auth middleware
-Auth::login(App\Models\User::first());
+
+// Auth::login(App\Models\User::first());
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,7 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/user/hero/{hero}', [HeroController::class, 'update'])->name('hero.update');
 
     // POST
-    Route::post('/hero/{hero}/post', HeroPostController::class)->name('hero.post.store');
+    // Route::post('/hero/{hero}/post', HeroPostController::class)->name('hero.post.store');
 
     Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
@@ -56,6 +60,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // FOLLOW
     Route::post('/hero/{hero}/follow', FollowButton::class)->name('hero.follow');
+    Route::post('/hero/{hero}/post', CreatePost::class)->name('hero.post.store');
 
     Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
     Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);

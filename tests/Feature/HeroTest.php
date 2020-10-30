@@ -7,6 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\User;
+use App\Models\Post;
+use Livewire;
+use App\Http\Livewire\CreatePost;
 
 class HeroTest extends TestCase
 {
@@ -43,16 +46,18 @@ class HeroTest extends TestCase
         $response->assertRedirect("/user/hero/{$user->id}");
     }
 
+    // TODO: test file/ test more
     /** @test */
     public function hero_store_post()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
-        $response = $this->actingAs($user)
-            ->post("/hero/{$user->hero->id}/post", [
-                'body' => 'this is a string'
-            ]);
-        $this->assertDatabaseCount('posts', 1);
-        // $response->assertRedirect("/user/hero/{$user->hero->id}");
+        $this->actingAs($user);
+
+        Livewire::test(CreatePost::class)
+            ->set('model', $user->hero)
+            ->set('body', 'foobar')
+            ->call('save');
+
+        $this->assertTrue(Post::whereBody('foobar')->exists());
     }
 }
