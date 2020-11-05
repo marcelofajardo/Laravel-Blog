@@ -58,7 +58,6 @@
       {{! $post->isLiked() ?: 'text-blue-700'}}"
         onclick="event.preventDefault();
           document.querySelector('#postLikeForm').submit()">
-
         <span>
           {{ $post->likes()->count() }}
         </span>

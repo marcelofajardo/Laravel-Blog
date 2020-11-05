@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('like', function ($user, $post) {
             // dd($post);
-        return $user->id === $post->id;
+        return $user->id !== $post->id;
     });
     }
 }
