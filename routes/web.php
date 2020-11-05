@@ -26,6 +26,7 @@ use App\Http\Livewire\CreatePost;
 // TODO: Refactor auth middleware
 
 // Auth::login(App\Models\User::first());
+// Auth::logout();
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,14 +34,12 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+
     // HERO
-    Route::get('/user/hero/{hero}', [HeroController::class, 'show'])->name('hero.show');
     Route::get('/user/hero/{hero}/edit', [HeroController::class, 'edit'])->name('hero.edit');
     Route::put('/user/hero/{hero}', [HeroController::class, 'update'])->name('hero.update');
 
     // POST
-    // Route::post('/hero/{hero}/post', HeroPostController::class)->name('hero.post.store');
-
     Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/post/{post}', [PostController::class, 'update'])->name('post.update');
@@ -48,7 +47,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // COMMENT
     Route::post('/post/{post}/comment', PostCommentController::class, )->name('post.comment.store');
-
     Route::get('/comment/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
     Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
@@ -62,6 +60,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/hero/{hero}/follow', FollowButton::class)->name('hero.follow');
     Route::post('/hero/{hero}/post', CreatePost::class)->name('hero.post.store');
 
-    Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
-    Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);
 });
+
+Route::get('/user/hero/{hero}', [HeroController::class, 'show'])->name('hero.show');
+Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
+Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);

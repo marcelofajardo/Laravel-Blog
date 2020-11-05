@@ -24,6 +24,12 @@ class Hero extends Model
         return route("hero.{$append}", [$this->id]);
     }
 
+    // Check if auth user own the hero
+    public function isOwned()
+    {
+        return auth()->user()->id === $this->id;
+    }
+
     public function getAvatarAttribute()
     {
         return $this->user->profile_photo_url;

@@ -4,11 +4,13 @@
     <x-hero :hero="$hero"></x-hero>
   </div>
 
-  <div class="mb-6 p-2 rounded shadow">
-    {{-- <x-post-create :hero="$hero">
-    </x-post-create> --}}
-    @livewire('create-post', ['model' => $hero])
-  </div>
+  @auth
+    @if ($hero->isOwned())
+    <div class="mb-6 p-2 rounded shadow">
+      @livewire('create-post', ['model' => $hero])
+    </div>
+    @endif
+  @endauth
 
   <div class="rounded shadow">
     @foreach ($posts as $post)

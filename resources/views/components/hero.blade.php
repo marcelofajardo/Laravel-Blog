@@ -11,23 +11,25 @@
 <div
   class="flex justify-between items-start my-4">
   <div class="p-2" style="max-width: 150px">
-    <p class="text-sm text-blue-400">@Lipsum</p>
+  <p class="text-sm text-blue-400">{{'@' . $hero->user->username}}</p>
     <h2 class="font-bold my-1">
       {{$hero->user->name}}
     </h2>
     <p class="text-xs text-gray-700">
-      Joined {{$hero->created_at->diffForHumans()}}
+      Joined
+      {{$hero->created_at->diffForHumans()}}
     </p>
   </div>
-  @if (auth()->user()->id === $hero->id)
-  <a href="{{$hero->path('edit')}}"
-    class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
-    border border-blue-400 rounded hover:bg-blue-400 hover:text-white"
-    >Edit Profile
-  </a>
-  @else
- @livewire('follow-button', ['hero'=> $hero])
-@endif
+  @auth
+    @if ($hero->isOwned())
+      <a href="{{$hero->path('edit')}}"
+        class="px-4 py-2 mt-4 text-xs font-semibold text-blue-400
+        border border-blue-400 rounded hover:bg-blue-400 hover:text-white">Edit Profile
+      </a>
+    @else
+      @livewire('follow-button', ['hero'=> $hero])
+    @endif
+  @endauth
 </div>
 
 <p class="mb-6 text-sm text-gray-600">

@@ -30,7 +30,7 @@ class CreatePost extends Component
         if ($this->image) {
             $attributes['image'] = $attributes['image']->store('posts', 'public');
         }
-        $this->model->posts()->create($attributes);
+        auth()->user()->hero->posts()->create($attributes);
         session()->flash('success', 'Post successfully Created.');
         $this->body = null;
         $this->image = null;
