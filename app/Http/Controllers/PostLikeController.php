@@ -8,7 +8,7 @@ use App\Models\Post;
 
 class PostLikeController extends Controller
 {
-    public function store(Post $post)
+    public function __invoke(Post $post)
     {
         $post->like();
         return back();

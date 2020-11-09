@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
 
     // LIKE
-    Route::post('/posts/{post}/like', [PostLikeController::class, 'store'])->name('post.like');
+    Route::post('/posts/{post}/like', PostLikeController::class)->name('post.like');
     Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comment.like');
     Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
 });
