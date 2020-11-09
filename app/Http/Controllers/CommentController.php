@@ -7,15 +7,6 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Comment $comment)
-    {
-        $attributes = $request->validate([
-            'body' => 'required|min:5'
-        ]);
-
-        dd($attributes);
-    }
-
     public function edit(Comment $comment)
     {
         $this->authorize('update', $comment);
@@ -25,19 +16,19 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $this->authorize('update', $comment);
+
         $attributes = $request->validate([
             'body' => 'required|min:5'
         ]);
 
         $comment->update($attributes);
-        return redirect('/post/'.$comment->commentable->id);
+        return redirect("/posts/{$comment->commentable->id}");
     }
 
     public function destroy(Comment $comment)
     {
         $this->authorize('delete', $comment);
         $comment->delete();
-        return redirect('/post/'.$comment->commentable->id);
+        return redirect("/post/{$comment->commentable->id}");
     }
-
 }

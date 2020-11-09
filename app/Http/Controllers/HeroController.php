@@ -28,6 +28,6 @@ class HeroController extends Controller
         ]);
 
         $hero->update($attributes);
-        return redirect("user/hero/$hero->id");
+        return redirect("users/heroes/{$hero->id}");
     }
 }

@@ -7,8 +7,7 @@ use App\Models\Comment;
 
 class CommentLikeController extends Controller
 {
-    //
-    public function store(Comment $comment)
+    public function store(Request $request, Comment $comment)
     {
         $comment->like();
         return back();

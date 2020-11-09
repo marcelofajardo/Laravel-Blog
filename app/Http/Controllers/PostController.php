@@ -9,8 +9,8 @@ class PostController extends Controller
 {
     public function show(Post $post)
     {
-        $comments = $post->comments;
         $post->increment('views_count');
+        $comments = $post->comments;
         return view('post.show', compact('post', 'comments'));
     }
 
@@ -23,18 +23,20 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
+
         $attributes = $request->validate([
             'body' => 'required|min:5',
         ]);
 
         $post->update($attributes);
-        return redirect('/post/' . $post->id);
+        return redirect("/post/{$post->id}");
     }
 
-    public function destroy(Request $request, Post $post)
+    public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
         $post->delete();
-        return redirect('/user/hero/' . $post->postable->id);
+        // redirect back to auth user
+        return redirect("/users/heroes/{$post->postable->id}");
     }
 }
