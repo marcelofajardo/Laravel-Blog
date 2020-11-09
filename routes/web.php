@@ -1,17 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HeroController;
-use App\Http\Controllers\HeroPostController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\PostCommentController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostLikeController;
-use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\{
+    HeroController,
+    HeroPostController,
+    PostController,
+    PostCommentController,
+    CommentController,
+    PostLikeController,
+    CommentLikeController
+};
 
-// LIVEWIRE
-use App\Http\Livewire\FollowButton;
-use App\Http\Livewire\CreatePost;
+use App\Http\Livewire\{FollowButton, CreatePost};
 
 /*
 |--------------------------------------------------------------------------
