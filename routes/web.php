@@ -23,7 +23,7 @@ use App\Http\Livewire\CreatePost;
 |
 */
 
-// Auth::login(App\Models\User::Factory->create());
+Auth::login(App\Models\User::first());
 // Auth::logout();
 
 Route::get('/', function () {

@@ -24,7 +24,7 @@ class Post extends Model
 
     public function path($append = "index")
     {
-        return route("post.$append", $this->id);
+        return route("posts.$append", $this->id);
     }
 
     public function getPostImageAttribute()

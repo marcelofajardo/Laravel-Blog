@@ -1,72 +1,60 @@
-<nav x-data="{ open: false }"
-    class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div
-                    class="flex-shrink-0 flex items-center">
-                    <a href="/dashboard">
-                        <x-jet-application-mark
-                            class="block h-9 w-auto" />
-                    </a>
-                </div>
-            </div>
-
-            <!-- Hamburger -->
-            <div
-                class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 24 24">
-                        <path
-                            :class="{'hidden': open, 'inline-flex': ! open }"
-                            class="inline-flex"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path
-                            :class="{'hidden': ! open, 'inline-flex': open }"
-                            class="hidden"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+<nav class="bg-white px-4">
+    <!-- DESKTOP-->
+    <div class="hidden md:flex items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-end">
+            <a href="/">
+                <x-jet-application-mark
+                    class="block h-9 w-auto" />
+            </a>
+        </div>
+        <!-- MAIN NAV-->
+        <div class="flex ml-4 text-gray-600">
+            @auth
+            <a href="/users/heroes/{{ auth()->user()->hero->id }}"
+                class="py-1 px-2 border-b-2 border-transparent
+            hover:border-blue-400">
+                Hero
+            </a>
+            @endauth
+            <a href="/users" class="py-1 px-2 border-b-2 border-transparent
+                    hover:border-blue-400">
+                Users
+            </a>
+            <a href="/posts" class="py-1 px-2 border-b-2 border-transparent
+                    hover:border-blue-400">
+                posts
+            </a>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}"
-        class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+    <!-- MOBILE -->
+    <div class="md:hidden pt-4">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-end">
+            <a href="/">
+                <x-jet-application-mark
+                    class="block h-9 w-auto" />
+            </a>
+        </div>
+
+        <div
+            class="flex flex-col mt-4 text-gray-600">
             @auth
-            <x-jet-responsive-nav-link
-                href="/dashboard"
-                :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link
-                href="/user/hero/{{auth()->user()->id}}">
+            <a href="/users/heroes/{{ auth()->user()->hero->id }}"
+                class="py-1 border-b-2 border-transparent
+            hover:border-blue-400">
                 Hero
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link
-                href="/users">
-                users
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link
-                href="/posts">
-                posts
-            </x-jet-responsive-nav-link>
+            </a>
             @endauth
+            <a href="/users" class="py-1 border-b-2 border-transparent
+                hover:border-blue-400">
+                Users
+            </a>
+            <a href="/posts" class="py-1 border-b-2 border-transparent
+                hover:border-blue-400">
+                posts
+            </a>
         </div>
     </div>
 </nav>
