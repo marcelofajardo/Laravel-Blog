@@ -11,10 +11,11 @@ use App\Traits\Likable;
 
 class Post extends Model
 {
-    use HasFactory, Commentable, Likable;
+    use HasFactory;
+    use Commentable;
+    use Likable;
 
     protected $fillable= ['body','user_id','image'];
-    protected $with = ['postable'];
 
     public function postable()
     {

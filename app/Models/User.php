@@ -65,9 +65,10 @@ class User extends Authenticatable
         parent::boot();
 
         static::created(function ($user) {
-            $user->hero()->create();
+            $user->hero()->create([
+                'username' => Str::slug($user->name, '.')
+                ]);
         });
-
     }
 
     public function comments()

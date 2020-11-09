@@ -12,7 +12,6 @@ class Hero extends Model
     use HasFactory, Postable;
 
     protected $fillable = ['bio'];
-    protected $with = ['user'];
 
     public function user()
     {
