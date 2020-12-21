@@ -26,7 +26,7 @@ class Comment extends Model
 
     public function path($append = "index")
     {
-        return route("comment.$append", $this->id);
+        return route("comments.$append", $this->id);
     }
 
     public function getlikesCountAttribute()

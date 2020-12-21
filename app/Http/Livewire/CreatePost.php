@@ -38,7 +38,7 @@ class CreatePost extends Component
             $attributes['image'] = $attributes['image']->store('posts', 'public');
 
         // create post
-        $model->posts()->create($attributes);
+        $this->model->posts()->create($attributes);
         // create success message
         session()->flash('success', 'Post successfully Created.');
         // clear user input

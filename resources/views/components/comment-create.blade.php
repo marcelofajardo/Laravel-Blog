@@ -1,4 +1,4 @@
-<form action="{{$post->path('comment.store')}}"
+<form action="{{$post->path('comments.store')}}"
   method="POST">
   @csrf
 

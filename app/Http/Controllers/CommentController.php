@@ -29,6 +29,6 @@ class CommentController extends Controller
     {
         $this->authorize('delete', $comment);
         $comment->delete();
-        return redirect("/post/{$comment->commentable->id}");
+        return back();
     }
 }

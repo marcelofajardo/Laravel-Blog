@@ -50,7 +50,7 @@
     </p>
 
     <div
-    class="flex px-2 text-xs text-gray-700 mb-6">
+      class="flex px-2 text-xs text-gray-700 mb-6">
 
       <a href="#" class="flex items-center px-3 border border-gray-400 rounded-full
       hover:text-blue-400 hover:border-blue-400
@@ -75,6 +75,7 @@
           </g>
         </svg>
       </a>
+      @if ($post->postable->id !== auth()->user()->id)
       @can('like', $post)
       <form id="postLikeForm"
         action="{{$post->path('like')}}"
@@ -82,6 +83,7 @@
         @csrf
       </form>
       @endcan
+      @endif
 
       <p
         class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">

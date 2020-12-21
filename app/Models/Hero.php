@@ -20,7 +20,7 @@ class Hero extends Model
 
     public function path($append = 'index')
     {
-        return route("hero.{$append}", [$this->id]);
+        return route("heroes.{$append}", [$this->id]);
     }
 
     // Check if auth user own the hero

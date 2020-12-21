@@ -34,8 +34,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     // HERO
-    Route::get('/users/heroes/{hero}/edit', [HeroController::class, 'edit'])->name('hero.edit');
-    Route::put('/users/heroes/{hero}', [HeroController::class, 'update'])->name('hero.update');
+    Route::get('/users/heroes/{hero}/edit', [HeroController::class, 'edit'])->name('heroes.edit');
+    Route::put('/users/heroes/{hero}', [HeroController::class, 'update'])->name('heroes.update');
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('hero.follow');
 
     // POST
@@ -43,13 +43,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('posts', PostController::class)->except('index', 'create');
 
     // COMMENT
-    Route::post('/posts/{post}/comments', PostCommentController::class, )->name('post.comment.store');
+    Route::post('/posts/{post}/comments', PostCommentController::class, )->name('posts.comments.store');
     Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
 
     // LIKE
-    Route::post('/posts/{post}/like', PostLikeController::class)->name('post.like');
-    Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comment.like');
-    Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comment.dislike');
+    Route::post('/posts/{post}/like', PostLikeController::class)->name('posts.like');
+    Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comments.like');
+    Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
 });
 
 Route::get('/users/heroes/{hero}', [HeroController::class, 'show'])->name('hero.show');
