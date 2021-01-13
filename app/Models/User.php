@@ -60,10 +60,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    // overide parent boot method
     protected static function boot()
     {
+        // call parent boot method
         parent::boot();
 
+        // fire when user is created
         static::created(function ($user) {
             $user->hero()->create();
         });
