@@ -30,15 +30,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function ($user, $ability) {
-            if ($user->isAdmin()) {
-                return true;
-            }
-        });
-
         Gate::define('like', function ($user, $post) {
-            // dd($post);
-        return $user->id !== $post->id;
-    });
+            return $user->id !== $post->postable->id;
+        });
     }
 }

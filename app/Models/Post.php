@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\Commentable;
 use App\Traits\Likable;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -27,6 +28,14 @@ class Post extends Model
     }
 
     /**
+     * Check if auth user owned the post
+     */
+    public function isOwned()
+    {
+        return Auth::id() === $this->postable->id;
+    }
+
+    /**
      * Post route path
      */
     public function path($append = "index")
@@ -34,9 +43,19 @@ class Post extends Model
         return route("posts.$append", $this->id);
     }
 
-    public function getPostImageAttribute()
+    public function getAuthorIdAttribute()
     {
-        return 'http://127.0.0.1:8000/storage/' . $this->image;
+        return $this->postable->id;
+    }
+
+    public function getAuthorNameAttribute()
+    {
+        return '@' . $this->postable->username;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/' . $this->image);
     }
 
     public function getCreatedAtAttribute()
