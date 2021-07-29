@@ -1,8 +1,8 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HeroController;
-use App\Http\Controllers\HeroPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\CommentController;
@@ -11,7 +11,9 @@ use App\Http\Controllers\CommentLikeController;
 
 use App\Http\Livewire\FollowButton;
 use App\Http\Livewire\CreatePost;
-use Illuminate\Support\Facades\Auth;
+
+use App\Models\Post;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,21 +30,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/users', 'users', ['users' => User::latest()->paginate(20)]);
+Route::view('/posts', 'post/index', ['posts' => Post::latest()->paginate(20)]);
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     // HERO
-    Route::get('/users/heroes/{hero}', [HeroController::class, 'show'])->name('hero.show');
-    Route::get('/users/heroes/{hero}/edit', [HeroController::class, 'edit'])->name('heroes.edit');
-    Route::put('/users/heroes/{hero}', [HeroController::class, 'update'])->name('heroes.update');
-    Route::post('/heroes/{hero}/follow', FollowButton::class)->name('hero.follow');
+    Route::resource('users.heroes', HeroController::class)->only(['show', 'edit', 'update']);
+    Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
 
     // POST
-    Route::post('/heroes/{hero}/posts', CreatePost::class)->name('hero.post.store');
-    Route::resource('posts', PostController::class)->except('index', 'create');
+    Route::post('/heroes/{hero}/posts', CreatePost::class)->name('heroes.posts.store');
+    Route::resource('posts', PostController::class)->except(['index', 'create']);
 
     // COMMENT
-    Route::post('/posts/{post}/comments', PostCommentController::class, )->name('posts.comments.store');
+    Route::post('/posts/{post}/comments', PostCommentController::class,)->name('posts.comments.store');
     Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
 
     // LIKE
@@ -50,6 +53,3 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comments.like');
     Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
 });
-
-Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
-Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);
