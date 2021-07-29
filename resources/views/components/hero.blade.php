@@ -26,6 +26,7 @@
     @endauth
 </div>
 
+{{-- if you want an inline edit-able hero info, create a parent livewire component --}}
 <p class="mb-6 text-sm text-gray-600">
     {{$hero->bio ?? "Update your bio.."}}
 </p>
