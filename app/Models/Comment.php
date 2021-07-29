@@ -29,7 +29,7 @@ class Comment extends Model
         return route("comments.$append", $this->id);
     }
 
-    public function getlikesCountAttribute()
+    public function getTotalLikesAttribute()
     {
         $likes = $this->likes()->where('liked', true)->count();
         $dislikes = $this->likes()->where('liked', false)->count();
