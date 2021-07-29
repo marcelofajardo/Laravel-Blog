@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 /**
  * Follow a user
@@ -12,8 +13,7 @@ class FollowButton extends Component
 
     public function follow()
     {
-        // toggle hero_user pivot table
-        auth()->user()->following()->toggle($this->hero);
+        Auth::user()->following()->toggle($this->hero);
     }
 
     public function render()
