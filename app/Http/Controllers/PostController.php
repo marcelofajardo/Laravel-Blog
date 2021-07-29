@@ -10,10 +10,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->increment('views_count');
-        $comments = $post->comments;
-        return view('post.show', compact('post', 'comments'));
+        return view('post.show', [
+            'post' => $post,
+            'comments' => $post->comments
+        ]);
     }
 
+    // TODO: convert to livewirr
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
@@ -24,19 +27,21 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $attributes = $request->validate([
+        $validatedData = $request->validate([
             'body' => 'required|min:5',
         ]);
 
-        $post->update($attributes);
-        return redirect("/post/{$post->id}");
+        $post->update($validatedData);
+
+        return redirect("/post/{$post->id}")->with('success', 'post successfuly updated.');
     }
 
+    // TODO: convert to livewire
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
         $post->delete();
-        // redirect back to auth user
+
         return redirect("/users/heroes/{$post->postable->id}");
     }
 }

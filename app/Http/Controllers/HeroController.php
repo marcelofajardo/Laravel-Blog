@@ -9,8 +9,10 @@ class HeroController extends Controller
 {
     public function show(Hero $hero)
     {
-        $posts = $hero->posts;
-        return view('hero.show', compact('hero', 'posts'));
+        return view('hero.show', [
+            'hero' => $hero,
+            'posts' => $hero->posts
+        ]);
     }
 
     public function edit(Hero $hero)
@@ -23,11 +25,14 @@ class HeroController extends Controller
     {
         $this->authorize('update', $hero);
 
-        $attributes = $request->validate([
+        $validatedData = $request->validate([
             'bio' => 'required|min:5'
         ]);
 
-        $hero->update($attributes);
-        return redirect("users/heroes/{$hero->id}");
+        // TODO: can validate User data
+
+        $hero->update($validatedData);
+
+        return redirect("users/heroes/{$hero->id}")->with('success', 'Hero successfuly updated');
     }
 }

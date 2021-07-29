@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 
+// TODO: convert to livewire
 class CommentController extends Controller
 {
     public function edit(Comment $comment)
@@ -17,11 +18,12 @@ class CommentController extends Controller
     {
         $this->authorize('update', $comment);
 
-        $attributes = $request->validate([
+        $validatedData = $request->validate([
             'body' => 'required|min:5'
         ]);
 
-        $comment->update($attributes);
+        $comment->update($validatedData);
+
         return redirect("/posts/{$comment->commentable->id}");
     }
 
