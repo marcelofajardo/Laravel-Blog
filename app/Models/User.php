@@ -86,6 +86,7 @@ class User extends Authenticatable
     }
 
     /**
+     * TODO: make followable or move to hero model
      * Get the user's following heroes
      */
     public function following()
