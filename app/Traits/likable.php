@@ -2,33 +2,36 @@
 
 namespace App\Traits;
 
-use App\Models\User;
-use App\Notifications\Liked;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
+
+// use App\Notifications\Liked;
 
 trait Likable
 {
     public function likes()
     {
-        return $this->morphMany('App\Models\Like', 'likable');
+        return $this->morphMany(Like::class, 'likable');
     }
 
     public function like($liked = true)
     {
         if ($this->isLiked($liked)) {
             return $this->likes()
-                ->where('user_id', auth()->user()->id)
+                ->where('user_id', Auth::id())
                 ->where('liked', $liked)
                 ->delete();
         }
 
         $this->likes()->updateOrCreate(
             [
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'likable_id' => $this->id
             ],
-            [ 'liked' => $liked ]
+            ['liked' => $liked]
         );
-        return auth()->user()->notify(new Liked(auth()->user()));
+
+        // return auth()->user()->notify(new Liked(auth()->user()));
     }
 
     public function dislike()
@@ -39,9 +42,9 @@ trait Likable
     public function isLiked($liked = true)
     {
         return (bool) $this->likes()
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', Auth::id())
             ->where('liked', $liked)
-            ->count();
+            ->count() > 0;
     }
 
     public function isDisliked()
