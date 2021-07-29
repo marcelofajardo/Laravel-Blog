@@ -1,4 +1,4 @@
-<x-master>
+<x-app-layout>
   <x-slot name="header">Post</x-slot>
 
   <div class="mb-6 rounded shadow p-2">
@@ -6,11 +6,11 @@
       class="flex justify-between items-center">
       <p class="text-xs text-gray-700 mb-2">
         <a class="font-semibold hover:text-blue-400"
-          href="{{ route('hero.show', $post->postable->id) }}">{{'@'.$post->postable->username}}
+          href="{{ route('heroes.show', $post->postable->id) }}">{{'@'.$post->postable->username}}
         </a>
         &bull;
         Posted
-        {{ $post->created_at->diffForHumans() }}
+        {{ $post->created_at }}
       </p>
       <div class="text-xs">
         @can('update', $post)
@@ -109,4 +109,4 @@
     <x-comment-create :post="$post">
     </x-comment-create>
   </div>
-</x-master>
+</x-app-layout>

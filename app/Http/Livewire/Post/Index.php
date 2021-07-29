@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire\Post;
 
+use App\Models\Hero;
+use App\Models\Post;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $posts;
+    public $hero;
+
+    protected $listeners = ['refresh-post' => '$refresh'];
 
     public function render()
     {

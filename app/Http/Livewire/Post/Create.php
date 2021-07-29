@@ -38,8 +38,10 @@ class Create extends Component
 
         $this->model->posts()->create($validatedData);
 
-        $this->body = null;
-        $this->image = null;
+        $this->body = '';
+        $this->image = '';
+
+        $this->emitUp('refresh-post');
 
         session()->flash('success', 'Post successfully Created.');
     }

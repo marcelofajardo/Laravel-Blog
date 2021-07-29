@@ -9,6 +9,9 @@ class Show extends Component
     public $post;
     public $author_name;
 
+    // update
+    // delete
+
     public function mount()
     {
         $this->author_name = '@' . $this->post->postable->username;

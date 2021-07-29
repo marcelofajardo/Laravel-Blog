@@ -10,7 +10,6 @@ use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 
 use App\Http\Livewire\FollowButton;
-use App\Http\Livewire\CreatePost;
 
 use App\Models\Post;
 use App\Models\User;
@@ -41,7 +40,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
 
     // POST
-    Route::post('/heroes/{hero}/posts', CreatePost::class)->name('heroes.posts.store');
     Route::resource('posts', PostController::class)->except(['index', 'create']);
 
     // COMMENT

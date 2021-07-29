@@ -9,10 +9,7 @@ class HeroController extends Controller
 {
     public function show(Hero $hero)
     {
-        return view('hero.show', [
-            'hero' => $hero,
-            'posts' => $hero->posts
-        ]);
+        return view('hero.show', compact('hero'));
     }
 
     public function edit(Hero $hero)
