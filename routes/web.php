@@ -37,7 +37,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     // HERO
-    Route::resource('users.heroes', HeroController::class)->only(['show', 'edit', 'update']);
+    Route::resource('users/heroes', HeroController::class)->only(['show', 'edit', 'update']);
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
 
     // POST
