@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\Commentable;
 use App\Traits\Likable;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -36,5 +37,11 @@ class Post extends Model
     public function getPostImageAttribute()
     {
         return 'http://127.0.0.1:8000/storage/' . $this->image;
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        $createdAt = $this->attributes['created_at'];
+        return Carbon::parse($createdAt)->diffForHumans();
     }
 }
