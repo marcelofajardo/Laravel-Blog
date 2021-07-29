@@ -24,8 +24,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Auth::login(App\Models\User::factory()->create());
-
 Route::get('/', function () {
     return view('welcome');
 });
