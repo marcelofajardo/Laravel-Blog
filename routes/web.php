@@ -32,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     // HERO
+    Route::get('/users/heroes/{hero}', [HeroController::class, 'show'])->name('hero.show');
     Route::get('/users/heroes/{hero}/edit', [HeroController::class, 'edit'])->name('heroes.edit');
     Route::put('/users/heroes/{hero}', [HeroController::class, 'update'])->name('heroes.update');
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('hero.follow');
@@ -50,6 +51,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
 });
 
-Route::get('/users/heroes/{hero}', [HeroController::class, 'show'])->name('hero.show');
 Route::view('/users', 'users', ['users' => App\Models\User::latest()->paginate(20)]);
 Route::view('/posts', 'post/index', ['posts' => App\Models\Post::latest()->paginate(20)]);
