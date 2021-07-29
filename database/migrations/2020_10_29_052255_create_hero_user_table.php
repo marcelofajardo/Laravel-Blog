@@ -13,6 +13,7 @@ class CreateHeroUserTable extends Migration
      */
     public function up()
     {
+        //! FIXME: what's this for?
         Schema::create('hero_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');

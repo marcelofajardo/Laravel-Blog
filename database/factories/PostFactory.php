@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
-use App\Models\Hero;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+
+use App\Models\Post;
+use App\Models\Hero;
 
 class PostFactory extends Factory
 {
@@ -26,8 +27,8 @@ class PostFactory extends Factory
         return [
             'body' => $this->faker->paragraph(),
             'views_count' => $this->faker->randomDigit,
-            'postable_id' => Hero::pluck('id')->random(),
-            'postable_type' => 'App\Models\Hero',
+            'postable_id' => Hero::all()->random(),
+            'postable_type' => Hero::class,
 
         ];
     }
