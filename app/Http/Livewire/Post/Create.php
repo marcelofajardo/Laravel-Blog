@@ -33,7 +33,7 @@ class Create extends Component
         ]);
 
         if ($this->image) {
-            $attributes['image'] = $validatedData['image']->store('posts', 'public');
+            $validatedData['image'] = $validatedData['image']->store('posts', 'public');
         }
 
         $this->model->posts()->create($validatedData);
