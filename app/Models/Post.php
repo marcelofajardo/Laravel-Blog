@@ -15,6 +15,7 @@ class Post extends Model
     use Likable;
 
     protected $fillable = ['body', 'image', 'user_id'];
+    protected $with = ['comments'];
 
     /**
      * Get the parent postable model
