@@ -72,16 +72,25 @@ class User extends Authenticatable
         });
     }
 
+    /**
+     * Get the user's comments
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * Get the user's hero
+     */
     public function hero()
     {
         return $this->hasOne(Hero::class);
     }
 
+    /**
+     * Get the user's following heroes
+     */
     public function following()
     {
         return $this->belongsToMany(Hero::class)->withTimestamps();

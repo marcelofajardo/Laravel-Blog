@@ -11,6 +11,9 @@ class Like extends Model
 
     protected $fillable= ['user_id', 'liked'];
 
+    /**
+     * Get the parent likable model
+     */
     public function likable()
     {
         return $this->morphTo();
