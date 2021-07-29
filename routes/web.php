@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentLikeController;
 
 use App\Http\Livewire\FollowButton;
 use App\Http\Livewire\CreatePost;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,7 @@ use App\Http\Livewire\CreatePost;
 |
 */
 
-Auth::login(App\Models\User::first());
-// Auth::logout();
+Auth::login(App\Models\User::factory()->create());
 
 Route::get('/', function () {
     return view('welcome');
