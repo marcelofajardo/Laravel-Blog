@@ -1,5 +1,6 @@
-<x-master>
+<x-app-layout>
   <x-slot name="header">Hero</x-slot>
+
   <div class="mb-6 rounded shadow p-2">
     <x-hero :hero="$hero"></x-hero>
   </div>
@@ -7,7 +8,7 @@
   @auth
     @if ($hero->isOwned())
     <div class="mb-6 p-2 rounded shadow">
-      @livewire('create-post', ['model' => $hero])
+      @livewire('post.create', ['model' => $hero])
     </div>
     @endif
   @endauth
@@ -20,4 +21,4 @@
     </div>
     @endforeach
   </div>
-</x-master>
+</x-app-layout>
