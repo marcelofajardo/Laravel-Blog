@@ -1,4 +1,4 @@
-<x-master>
+<x-app-layout>
     <x-slot name="header">Users</x-slot>
 
     <div class="mb-6">
@@ -15,4 +15,4 @@
             {{$users->links()}}
         </div>
     </div>
-</x-master>
+</x-app-layout>
