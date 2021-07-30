@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // POST
     // TODO: convert to livewire
     Route::resource('posts', PostController::class)->only(['edit', 'update', 'destroy']);
-    Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class);
+    Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class)->name('posts.show');
 
     // COMMENT
     // TODO: to livewire

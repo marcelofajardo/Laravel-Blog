@@ -15,6 +15,15 @@ class Show extends Component
         $this->post = $post;
     }
 
+    public function like()
+    {
+        if ($this->post->isOwned()) {
+            return;
+        }
+
+        $this->post->like();
+    }
+
     public function render()
     {
         return view('livewire.post.show')
