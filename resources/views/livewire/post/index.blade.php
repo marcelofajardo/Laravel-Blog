@@ -8,7 +8,7 @@
     {{-- FIXME: created_at doesn't update automatically --}}
     @foreach ($hero->posts as $post)
     <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200 p-2 pb-6">
-        @livewire('post.show', ['post' => $post], key($post->id))
+        @livewire('post.preview', ['post' => $post], key($post->id))
     </div>
     @endforeach
 </div>

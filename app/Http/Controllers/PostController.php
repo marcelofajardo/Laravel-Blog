@@ -8,11 +8,12 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function show(Post $post)
-    {
-        $post->increment('views_count');
-        return view('post.show', compact('post'));
-    }
+    // public function show(Post $post)
+    // {
+    //     $post->increment('views_count');
+    //      return view('livewire.Post.show', compact('post'));
+    //     // return view('post.show', compact('post'));
+    // }
 
     public function edit(Post $post)
     {

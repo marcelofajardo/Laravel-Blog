@@ -10,7 +10,6 @@ use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\CommentLikeController;
 
 use App\Http\Livewire\FollowButton;
-
 use App\Models\Post;
 use App\Models\User;
 
@@ -40,16 +39,18 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
 
     // POST
-    Route::resource('posts', PostController::class)->except(['index', 'create', 'store']);
+    // TODO: convert to livewire
+    Route::resource('posts', PostController::class)->only(['edit', 'update', 'destroy']);
+    Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class);
 
     // COMMENT
     // TODO: to livewire
-    // Route::post('/posts/{post}/comments', PostCommentController::class,)->name('posts.comments.store');
-    // Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
+    Route::post('/posts/{post}/comments', PostCommentController::class,)->name('posts.comments.store');
+    Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
 
     // LIKE
     // TODO: to livewire
-    // Route::post('/posts/{post}/like', PostLikeController::class)->name('posts.like');
-    // Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comments.like');
-    // Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
+    Route::post('/posts/{post}/like', PostLikeController::class)->name('posts.like');
+    Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comments.like');
+    Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
 });
