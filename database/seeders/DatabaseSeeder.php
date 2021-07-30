@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(5)->create();
+        User::factory()->count(15)->create();
 
         Post::factory()
-            ->count(rand(5,8))
+            ->count(rand(30,50))
             ->hasComments(rand(3, 7))
             ->create();
     }
