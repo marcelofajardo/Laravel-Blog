@@ -39,8 +39,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
 
     // POST
-    // TODO: convert to livewire
-    Route::resource('posts', PostController::class)->only(['edit', 'update', 'destroy']);
     Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class)->name('posts.show');
 
     // COMMENT
