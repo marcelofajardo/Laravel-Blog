@@ -1,7 +1,7 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <x-slot name="header">
-        Post asdasf asf
+        Post
     </x-slot>
 
     <div class="mb-6 rounded shadow p-2">
@@ -15,19 +15,19 @@
             </p>
 
             {{-- POST CONTROLS --}}
-            <div class="text-xs">
-                @can(['update', 'delete'], $post)
-                <a href="{{ $post->path('edit')}}" class="text-blue-400 hover:text-blue-500 hover:underline mr-1">Edit
-                </a>
+            @if (!$isEdit_able)
 
-                <button class="text-red-400 hover:text-red-500 hover:underline"
-                    onclick="event.preventDefault();document.querySelector('#deletePost-{{$post->id}}').submit()">delete
+            @can(['update', 'delete'], $post)
+            <div class="text-xs">
+                <button wire:click="showEdit" class="text-blue-400 hover:text-blue-500 hover:underline mr-1">Edit
                 </button>
-                <form id="deletePost-{{$post->id}}" class="hidden" action="{{$post->path('destroy')}}" method="POST">
-                    @csrf @method('DELETE')
-                </form>
-                @endcan
+
+                <button wire:click="delete"
+                class="text-red-400 hover:text-red-500 hover:underline">delete
+                </button>
             </div>
+            @endcan
+            @endif
         </div>
 
         {{-- POST IMAGE --}}
@@ -38,20 +38,30 @@
         @endif
 
         {{-- POST BODY --}}
+        @if ($isEdit_able)
+
         <div>
-            <p class="px-2 mb-2 text-sm text-gray-900">{{$post->body}}</p>
+            <form wire:submit.prevent="update">
+                <div class="mb-6">
+                    <textarea wire:model="body" name="body" rows="15" class="w-full">{{$body}}</textarea>
+                </div>
+                <div class="text-right">
+                    <button
+                        class="px-4 py-2 text-sm rounded text-white bg-blue-500 focus:outline-none hover:bg-blue-400">Update</button>
+                </div>
+            </form>
         </div>
+        @else
+        <p class="px-2 mb-6 text-sm text-gray-900">{{$post->body}}</p>
+        @endif
 
         <div class="flex px-2 text-xs text-gray-700 mb-6">
 
             {{-- LIKES --}}
-            <button
-                wire:click="like"
-                class="flex items-center px-3 border border-gray-400 rounded-full
+            <button wire:click="like" class="flex items-center px-3 border border-gray-400 rounded-full
                 hover:text-blue-400 hover:border-blue-400
                 {{! $post->isOwned() ?: 'cursor-not-allowed' }}
-                {{! $post->isLiked() ?: 'text-blue-700'}}"
-                >
+                {{! $post->isLiked() ?: 'text-blue-700'}}">
                 <span>{{ $post->likes()->count() }}</span>
                 <span class="ml-1 mb-1">
                     <x-icons.like></x-icons.like>
