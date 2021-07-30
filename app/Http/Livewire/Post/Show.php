@@ -12,6 +12,12 @@ class Show extends Component
     // update
     // delete
 
+    public function like()
+    {
+        $this->post->like();
+
+    }
+
     public function mount()
     {
         $this->author_name = '@' . $this->post->postable->username;

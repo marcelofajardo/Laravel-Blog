@@ -23,13 +23,13 @@
     @auth
     <div class="flex px-2 text-xs text-gray-700">
         {{-- LIKE --}}
-        <p class="border border-gray-400 rounded-full px-3 flex items-center
+        <button wire:click="like" class="border border-gray-400 rounded-full px-3 flex items-center
           cursor-pointer hover:text-blue-400 hover:border-blue-400">
             {{ $post->likes()->count() }}
-            <a class="ml-1 mb-1" href="#">
+            <span class="ml-1 mb-1">
                 <x-icons.like></x-icons.like>
-            </a>
-        </p>
+            </span>
+        </button>
         {{-- COMMENTS --}}
         <p
             class="mx-2 border border-gray-400 rounded-full px-3 cursor-pointer hover:text-blue-400 hover:border-blue-400">
