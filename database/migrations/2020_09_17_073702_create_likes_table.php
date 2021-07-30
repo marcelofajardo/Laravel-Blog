@@ -21,7 +21,7 @@ class CreateLikesTable extends Migration
             $table->integer('likable_id');
             $table->string('likable_type');
 
-            $table->foreignId('user_id')->references('users');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

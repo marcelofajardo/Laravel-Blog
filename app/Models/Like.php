@@ -11,6 +11,8 @@ class Like extends Model
 
     protected $fillable= ['user_id', 'liked'];
 
+    protected $table = 'likes';
+
     /**
      * Get the parent likable model
      */

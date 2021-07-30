@@ -30,7 +30,6 @@ trait Likable
             ],
             ['liked' => $liked]
         );
-
         // return auth()->user()->notify(new Liked(auth()->user()));
     }
 
