@@ -22,8 +22,7 @@
                 <button wire:click="showEdit" class="text-blue-400 hover:text-blue-500 hover:underline mr-1">Edit
                 </button>
 
-                <button wire:click="delete"
-                class="text-red-400 hover:text-red-500 hover:underline">delete
+                <button wire:click="delete" class="text-red-400 hover:text-red-500 hover:underline">delete
                 </button>
             </div>
             @endcan
@@ -39,15 +38,16 @@
 
         {{-- POST BODY --}}
         @if ($isEdit_able)
-
         <div>
             <form wire:submit.prevent="update">
+                <div class="mb-6">
+                    <x-form.input-image :image="$image"></x-form.input-image>
+                </div>
                 <div class="mb-6">
                     <textarea wire:model="body" name="body" rows="15" class="w-full">{{$body}}</textarea>
                 </div>
                 <div class="text-right">
-                    <button
-                        class="px-4 py-2 text-sm rounded text-white bg-blue-500 focus:outline-none hover:bg-blue-400">Update</button>
+                    <x-form.button label="Update"></x-form.button>
                 </div>
             </form>
         </div>

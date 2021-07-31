@@ -6,15 +6,19 @@ use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Show extends Component
 {
     use AuthorizesRequests;
+    use WithFileUploads;
 
-    public $post;
-    public $body;
+    public Post $post;
+    public string $body;
+    public $image;
     public $isEdit_able = false;
     public $previous;
+
 
 
     public function mount(Post $post)
@@ -22,6 +26,13 @@ class Show extends Component
         $this->post = $post;
         $this->body = $post->body;
         $this->previous = URL::previous();
+    }
+
+    public function updatedImage()
+    {
+        $this->validate([
+            'image' => 'image|max:1024',
+        ]);
     }
 
     public function update()
