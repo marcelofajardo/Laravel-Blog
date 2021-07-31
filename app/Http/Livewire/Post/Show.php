@@ -31,7 +31,7 @@ class Show extends Component
     public function updatedImage()
     {
         $this->validate([
-            'image' => 'image|max:1024',
+            'image' => ['image', 'max:1024'],
         ]);
     }
 
@@ -39,11 +39,16 @@ class Show extends Component
     {
         $this->authorize('update', $this->post);
 
-        $this->validate([
-            'body' => ['required']
+        $validatedData = $this->validate([
+            'body' => ['required'],
+            'image' => ['nullable', 'image', 'max:1024'],
         ]);
 
-        $this->post->update(['body' => $this->body]);
+        if ($this->image) {
+            $validatedData['image'] = $validatedData['image']->store('posts', 'public');
+        }
+
+        $this->post->update($validatedData);
 
         session('success', 'post successfuly updated');
 
