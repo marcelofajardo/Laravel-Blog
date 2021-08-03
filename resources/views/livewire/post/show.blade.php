@@ -53,15 +53,14 @@
     @endif
 
     <p class="px-2 mb-6 text-sm text-gray-900">{{$post->body}}</p>
-    @endif
 
     <div class="flex px-2 text-xs text-gray-700 mb-6">
 
       {{-- LIKES --}}
       <button wire:click="like" class="flex items-center px-3 border border-gray-400 rounded-full
-                hover:text-blue-400 hover:border-blue-400
-                {{! $post->isOwned() ?: 'cursor-not-allowed' }}
-                {{! $post->isLiked() ?: 'text-blue-700'}}">
+      hover:text-blue-400 hover:border-blue-400
+      {{! $post->isOwned() ?: 'cursor-not-allowed' }}
+      {{! $post->isLiked() ?: 'text-blue-700'}}">
         <span>{{ $post->likes()->count() }}</span>
         <span class="ml-1 mb-1">
           <x-icons.like></x-icons.like>
@@ -81,9 +80,10 @@
         <a href="#">Views</a>
       </p>
     </div>
+    @endif
   </div>
 
   <div class="mb-6 rounded shadow p-2">
-   @livewire('comment.index', ['post' => $post])
+    @livewire('comment.index', ['post' => $post])
   </div>
 </div>
