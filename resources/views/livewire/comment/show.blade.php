@@ -2,14 +2,14 @@
 
   {{-- LIKE/DISLIKE --}}
   <div class="flex justify-between items-center flex-col px-4 text-sm text-gray-700">
-    <button class="hover:text-blue-700 {{! $comment->isLiked() ?: 'text-blue-700'}}">
+    <button wire:click="like" class="hover:text-blue-700 {{! $comment->isLiked() ?: 'text-blue-700'}}">
       <x-icons.like></x-icons.like>
     </button>
     <p class="my-2 {{ $comment->likes_count < 0 ? 'text-red-500' : 'text-green-500'}} ">
       {{$comment->likes_count ?? 0}}
     </p>
 
-    <button class="hover:text-red-700 {{! $comment->isDisliked() ?: 'text-red-700'}}">
+    <button wire:click="dislike" class="hover:text-red-700 {{! $comment->isDisliked() ?: 'text-red-700'}}">
       <x-icons.dislike></x-icons.dislike>
     </button>
 

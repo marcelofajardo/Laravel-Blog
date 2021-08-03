@@ -9,11 +9,21 @@ class Show extends Component
 {
     public Comment $comment;
     public string $body;
-    public bool $isEdit_able = true;
+    public bool $isEdit_able = false;
 
     public function mount()
     {
         $this->body = $this->comment->body;
+    }
+
+    public function like()
+    {
+        $this->comment->like();
+    }
+
+    public function dislike()
+    {
+        $this->comment->dislike();
     }
 
     public function render()
