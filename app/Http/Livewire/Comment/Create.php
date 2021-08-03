@@ -18,7 +18,7 @@ class Create extends Component
     public function save()
     {
         $this->validate([
-            'body' => ['required', 'min:5']
+            'body' => ['required']
         ]);
 
         $this->post->comments()->create([
