@@ -5,6 +5,8 @@
     </x-comment>
   </div>
   @endforeach
-  <x-comment-create :post="$post">
-  </x-comment-create>
+
+  <div>
+    @livewire('comment.create', ['post' => $post])
+  </div>
 </div>
