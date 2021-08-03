@@ -4,25 +4,25 @@ namespace App\Http\Livewire\Post;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\TemporaryUploadedFile;
 
 class Create extends Component
 {
 
     use WithFileUploads;
 
-    public $model;
-    public $body;
-    public $image;
-    public $uploaded_filename;
+    public object $model;
+    public string $body = '';
+    public ?TemporaryUploadedFile $image;
+    public string $uploaded_filename;
 
-    // live view image
     public function updatedImage()
     {
         $this->validate([
             'image' => 'image|max:1024',
         ]);
 
-        $this->uploaded_filename = $this->image->getClientOriginalName();
+        // $this->uploaded_filename = $this->image->getClientOriginalName();
     }
 
     public function save()
@@ -32,14 +32,14 @@ class Create extends Component
             'image' => 'nullable|image|max:1024',
         ]);
 
-        if ($this->image) {
+        if (isset($this->image)) {
             $validatedData['image'] = $validatedData['image']->store('posts', 'public');
         }
 
         $this->model->posts()->create($validatedData);
 
         $this->body = '';
-        $this->image = '';
+        $this->image = null;
 
         $this->emitUp('refresh-post');
 
