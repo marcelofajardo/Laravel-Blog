@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Comment;
 
 use App\Models\Comment;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Show extends Component
 {
+    use AuthorizesRequests;
+
     public Comment $comment;
     public string $body;
     public bool $isEdit_able = false;
@@ -14,6 +17,29 @@ class Show extends Component
     public function mount()
     {
         $this->body = $this->comment->body;
+    }
+
+    public function update()
+    {
+        $this->authorize('update', $this->comment);
+
+        $validatedData = $this->validate([
+            'body' => ['required']
+        ]);
+
+        $this->comment->update($validatedData);
+        $this->isEdit_able = false;
+        $this->emitUp('refresh-comments');
+
+        session()->flash('success', 'Comment updated successfuly.');
+    }
+
+    public function delete()
+    {
+        $this->authorize('delete', $this->comment);
+        $this->comment->delete();
+        $this->emitUp('refresh-comments');
+        session()->flash('success', 'Comment deleted successfuly.');
     }
 
     public function like()
@@ -24,6 +50,11 @@ class Show extends Component
     public function dislike()
     {
         $this->comment->dislike();
+    }
+
+    public function showEdit()
+    {
+        $this->isEdit_able = true;
     }
 
     public function render()

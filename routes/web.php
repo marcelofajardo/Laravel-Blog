@@ -24,6 +24,9 @@ use App\Models\User;
 |
 */
 
+// TODO: comment update/delete & follow button
+// if possible write tests
+
 Route::get('/', function () {
     return view('welcome');
 });

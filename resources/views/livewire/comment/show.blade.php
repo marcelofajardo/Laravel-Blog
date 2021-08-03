@@ -35,11 +35,11 @@
       {{-- COMMENT CONTROLS --}}
       <div class="text-xs">
         @can(['update','delete'], $comment)
-        <button class="text-blue-400 hover:text-blue-500 hover:underline mr-1">
+        <button wire:click="showEdit" class="text-blue-400 hover:text-blue-500 hover:underline mr-1">
           Edit
         </button>
 
-        <button class="text-red-400 over:text-red-500 hover:underline">
+        <button wire:click="delete" class="text-red-400 over:text-red-500 hover:underline">
           Delete
         </button>
         @endcan
@@ -49,7 +49,9 @@
     <form wire:submit.prevent="update" action="#">
       <div class="mb-6">
         <label for="body" class="block mb-1 text-sm font-bold text-gray-500">Comment</label>
-        <textarea wire:model="body" name="body" id="body" class="w-full" rows=10>{{$this->comment->body}}</textarea>
+        <textarea wire:model="body" name="body" id="body" class="w-full p-2 border rounded"
+          rows=10>{{$this->comment->body}}</textarea>
+        @error('body') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
       </div>
       <div class="text-right">
         <x-form.button label="Update"></x-form.button>
