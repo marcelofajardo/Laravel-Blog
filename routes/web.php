@@ -40,15 +40,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // POST
     Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class)->name('posts.show');
-
-    // COMMENT
-    // TODO: to livewire
-    Route::post('/posts/{post}/comments', PostCommentController::class,)->name('posts.comments.store');
-    Route::resource('comments', CommentController::class)->only('edit', 'update', 'destroy');
-
-    // LIKE
-    // TODO: to livewire
-    Route::post('/posts/{post}/like', PostLikeController::class)->name('posts.like');
-    Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store'])->name('comments.like');
-    Route::delete('/comments/{comment}/dislike', [CommentLikeController::class, 'destroy'])->name('comments.dislike');
 });
