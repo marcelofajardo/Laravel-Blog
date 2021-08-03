@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Post;
 
-use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\URL;
+
 use Livewire\Component;
 use Livewire\WithFileUploads;
+
+use App\Models\Post;
 
 class Show extends Component
 {
@@ -16,18 +18,21 @@ class Show extends Component
     public Post $post;
     public string $body;
     public $image;
-    public $isEdit_able = false;
-    public $previous;
 
-
+    public bool $isEdit_able = false;
+    public string $previous;
 
     public function mount(Post $post)
     {
         $this->post = $post;
         $this->body = $post->body;
+        // get previous redirection url
         $this->previous = URL::previous();
     }
 
+    /**
+     * Image real time validation using livewire hook
+     */
     public function updatedImage()
     {
         $this->validate([
@@ -35,6 +40,9 @@ class Show extends Component
         ]);
     }
 
+    /**
+     * Update the post
+     */
     public function update()
     {
         $this->authorize('update', $this->post);
@@ -45,23 +53,29 @@ class Show extends Component
         ]);
 
         if ($this->image) {
-            $validatedData['image'] = $validatedData['image']->store('posts', 'public');
+            $validatedData['image'] = $this->image->store('posts', 'public');
         }
 
         $this->post->update($validatedData);
-
-        session('success', 'post successfuly updated');
-
         $this->isEdit_able = false;
+        session()->flash('success', 'Post successfuly updated.');
     }
 
+    /**
+     * Delete the post
+     */
     public function delete()
     {
         $this->authorize('delete', $this->post);
+        // TODO: Add confirmation
         $this->post->delete();
+        session(['success', 'Post successfuly deleted.']);
         return redirect($this->previous);
     }
 
+    /**
+     * Like the post
+     */
     public function like()
     {
         if ($this->post->isOwned()) {
@@ -71,6 +85,9 @@ class Show extends Component
         $this->post->like();
     }
 
+    /**
+     * make post edit-able
+     */
     public function showEdit()
     {
         $this->isEdit_able = true;
