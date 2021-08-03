@@ -9,14 +9,16 @@ class Preview extends Component
     public $post;
     public $author_name;
 
-    public function like()
-    {
-        $this->post->like();
-    }
 
     public function mount()
     {
-        $this->author_name = '@' . $this->post->postable->username;
+        // dd($this->post);
+        $this->author_name = '@' . $this->post->hero->user->username;
+    }
+
+    public function like()
+    {
+        $this->post->like();
     }
 
     public function render()

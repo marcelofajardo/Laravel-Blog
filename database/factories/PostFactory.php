@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'views_count' => $this->faker->randomDigit,
             'postable_id' => Hero::all()->random(),
             'postable_type' => Hero::class,
-
+            'hero_id' => Hero::all()->random()
         ];
     }
 }

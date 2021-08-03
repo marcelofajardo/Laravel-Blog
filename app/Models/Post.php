@@ -16,7 +16,7 @@ class Post extends Model
     use Commentable;
     use Likable;
 
-    protected $fillable = ['body', 'image', 'user_id'];
+    protected $fillable = ['body', 'image', 'hero_id'];
     protected $with = ['comments'];
 
     /**
@@ -25,6 +25,11 @@ class Post extends Model
     public function postable()
     {
         return $this->morphTo();
+    }
+
+    public function hero()
+    {
+        return $this->belongsTo(Hero::class, 'hero_id', 'id');
     }
 
     /**

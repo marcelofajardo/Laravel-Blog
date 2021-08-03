@@ -1,9 +1,9 @@
 <div>
-    @if ($hero->isOwned())
-    <div class="my-6">
+    {{-- @if ($hero->isOwned()) --}}
+    <div class="my-6 pb-6">
         @livewire('post.create', ['model' => $hero])
     </div>
-    @endif
+    {{-- @endif --}}
 
     {{-- FIXME: created_at doesn't update automatically --}}
     @foreach ($hero->posts as $post)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Post;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -40,6 +41,8 @@ class Create extends Component
         if ($this->image) {
             $validatedData['image'] = $this->image->store('posts', 'public');
         }
+
+        $validatedData['hero_id'] = Auth::id();
 
         $this->model->posts()->create($validatedData);
 
