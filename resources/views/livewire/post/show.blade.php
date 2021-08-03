@@ -37,7 +37,7 @@
           <x-form.input-image :image="$image"></x-form.input-image>
         </div>
         <div class="mb-6">
-          <textarea wire:model="body" name="body" rows="15" class="w-full">{{$body}}</textarea>
+          <textarea wire:model.defer="body" name="body" rows="15" class="w-full">{{$body}}</textarea>
         </div>
         <div class="text-right">
           <x-form.button label="Update"></x-form.button>
