@@ -5,8 +5,9 @@
     <button wire:click="like" class="hover:text-blue-700 {{! $comment->isLiked() ?: 'text-blue-700'}}">
       <x-icons.like></x-icons.like>
     </button>
-    <p class="my-2 {{ $comment->likes_count < 0 ? 'text-red-500' : 'text-green-500'}} ">
-      {{$comment->likes_count ?? 0}}
+
+    <p class="my-2 {{ $comment->total_likes < 0 ? 'text-red-500' : 'text-green-500'}} ">
+      {{$comment->total_likes ?? 0}}
     </p>
 
     <button wire:click="dislike" class="hover:text-red-700 {{! $comment->isDisliked() ?: 'text-red-700'}}">
