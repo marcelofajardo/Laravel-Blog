@@ -14,7 +14,7 @@
             {{-- CREATE POST --}}
             <div class="mb-6 flex-1">
                 <textarea
-                    wire:model="body"
+                    wire:model.defer="body"
                     class="h-32 w-full border px-4 py-2 text-gray-700 leading-tight rounded focus:border-blue-500 focus:shadow-outline outline-none"
                     name="body" placeholder="Post something...?">{{ old('body') }}</textarea>
             </div>
