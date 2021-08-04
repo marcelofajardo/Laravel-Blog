@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hero;
+use App\Models\Post;
 
 class HeroController extends Controller
 {
     public function show(Hero $hero)
     {
-        return view('hero.show', compact('hero'));
+        $followers = $hero->user->following->pluck('id');
+        $heroes = $followers->merge([$hero->id]);
+        $posts = Post::whereIn('hero_id', $heroes)->get();
+        return view('hero.show', [
+            'hero' => $hero,
+            'posts' => $posts
+        ]);
     }
 
     public function edit(Hero $hero)

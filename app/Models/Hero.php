@@ -24,6 +24,14 @@ class Hero extends Model
     }
 
     /**
+     * Get heroes followers
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
      * User route path
      */
     public function path($append = 'index')

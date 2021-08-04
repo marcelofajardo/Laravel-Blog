@@ -8,7 +8,8 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $hero;
+    public Hero $hero;
+    public $posts;
 
     protected $listeners = ['refresh-post' => '$refresh'];
 

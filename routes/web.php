@@ -12,6 +12,7 @@ use App\Http\Controllers\CommentLikeController;
 use App\Http\Livewire\FollowButton;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,9 @@ use App\Models\User;
 |
 */
 
-// TODO: comment update/delete & follow button
-// if possible write tests
+// Auth::logout();
+
+// TODO: test following
 
 Route::get('/', function () {
     return view('welcome');
