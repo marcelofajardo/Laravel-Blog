@@ -2,18 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HeroController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\PostCommentController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostLikeController;
-use App\Http\Controllers\CommentLikeController;
-
-use App\Http\Livewire\FollowButton;
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,24 +13,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Auth::logout();
-
-// TODO: test following
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/users', 'users', ['users' => User::latest()->paginate(20)]);
-Route::view('/posts', 'post/index', ['posts' => Post::latest()->paginate(20)]);
+Route::view('/users', 'users', ['users' => \App\Models\User::latest()->paginate(20)]);
+Route::view('/posts', 'post/index', ['posts' => \App\Models\Post::latest()->paginate(20)]);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-
-    // HERO
-    Route::resource('users/heroes', HeroController::class)->only(['show', 'edit', 'update']);
-    Route::post('/heroes/{hero}/follow', FollowButton::class)->name('heroes.follow');
-
-    // POST
+    Route::resource('users/heroes', \App\Http\Controllers\HeroController::class)->only(['show', 'edit', 'update']);
     Route::get('/posts/{post}', \App\Http\Livewire\Post\Show::class)->name('posts.show');
 });
