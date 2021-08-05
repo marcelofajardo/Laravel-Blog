@@ -4,12 +4,14 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Hero;
+
 /**
  * Follow a user
  */
 class FollowButton extends Component
 {
-    public $hero;
+    public Hero $hero;
 
     public function follow()
     {
