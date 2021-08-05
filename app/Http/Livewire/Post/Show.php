@@ -24,6 +24,7 @@ class Show extends Component
 
     public function mount(Post $post)
     {
+        $post->increment('views_count');
         $this->post = $post;
         $this->body = $post->body;
         // get previous redirection url
