@@ -8,13 +8,6 @@ use App\Models\Post;
 class Preview extends Component
 {
     public Post $post;
-    public string $author_name;
-
-
-    public function mount()
-    {
-        $this->author_name = '@' . $this->post->hero->user->username;
-    }
 
     /**
      * Like the post
