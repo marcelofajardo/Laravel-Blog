@@ -21,6 +21,10 @@ class Preview extends Component
      */
     public function like()
     {
+        if ($this->post->isOwned()) {
+            return;
+        }
+
         $this->post->like();
     }
 
