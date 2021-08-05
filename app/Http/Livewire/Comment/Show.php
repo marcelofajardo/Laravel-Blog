@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Comment;
 
-use App\Models\Comment;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use App\Models\Comment;
 
 class Show extends Component
 {
@@ -28,12 +28,15 @@ class Show extends Component
         ]);
 
         $this->comment->update($validatedData);
-        $this->isEdit_able = false;
         $this->emitUp('refresh-comments');
+        $this->isEdit_able = false;
 
         session()->flash('success', 'Comment updated successfuly.');
     }
 
+    /**
+     * TODO: Add validation
+     */
     public function delete()
     {
         $this->authorize('delete', $this->comment);
