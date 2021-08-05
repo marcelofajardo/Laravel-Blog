@@ -57,19 +57,20 @@ class Show extends Component
         }
 
         $this->post->update($validatedData);
+
         $this->isEdit_able = false;
         session()->flash('success', 'Post successfuly updated.');
     }
 
     /**
+     * TODO: Add confirmation
      * Delete the post
      */
     public function delete()
     {
         $this->authorize('delete', $this->post);
-        // TODO: Add confirmation
         $this->post->delete();
-        session(['success', 'Post successfuly deleted.']);
+        session()->flash('success', 'Post successfuly deleted.');
         return redirect($this->previous);
     }
 
