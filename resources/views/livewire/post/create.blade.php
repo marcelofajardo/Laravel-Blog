@@ -1,7 +1,5 @@
 <div class="px-4">
-  <x-error-box></x-error-box>
   <form wire:submit.prevent="save" action="#" enctype="multipart/form-data" method="POST">
-    @csrf
 
     <div class="flex">
       {{-- PREVIEW UPLOAD IMAGE --}}
@@ -16,6 +14,7 @@
           class="h-32 w-full border px-4 py-2 text-gray-700 leading-tight rounded
           focus:border-blue-500 focus:shadow-outline outline-none"
           >{{ old('body') }}</textarea>
+          <x-form.inline-error field="body"></x-form.inline-error>
       </div>
     </div>
 
