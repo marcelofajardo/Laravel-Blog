@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire\Post;
 
-use App\Models\Hero;
-use App\Models\Post;
 use Livewire\Component;
+use App\Models\Hero;
 
 class Index extends Component
 {
