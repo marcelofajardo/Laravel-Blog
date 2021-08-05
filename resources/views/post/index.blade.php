@@ -3,9 +3,9 @@
 
     <div class="mb-6">
         @foreach ($posts as $post)
-        <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200 p-2 pb-6">
-            @livewire('post.preview', ['post' => $post])
-        </div>
+          <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200 p-2 pb-6">
+              @livewire('post.preview', ['post' => $post])
+          </div>
         @endforeach
 
         <div>
