@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Hero;
 use App\Models\Post;
 
 class HeroController extends Controller
 {
+    /**
+     * Show the user and followed users posts
+     */
     public function show(Hero $hero)
     {
         $followers = $hero->user->following->pluck('id');
         $heroes = $followers->merge([$hero->id]);
         $posts = Post::whereIn('hero_id', $heroes)->get();
+
         return view('hero.show', [
             'hero' => $hero,
             'posts' => $posts
@@ -28,14 +33,8 @@ class HeroController extends Controller
     public function update(Request $request, Hero $hero)
     {
         $this->authorize('update', $hero);
-
-        $validatedData = $request->validate([
-            'bio' => 'required|min:5'
-        ]);
-
-        // TODO: can validate User data
-
-        $hero->update($validatedData);
+        $request->validate(['bio' => 'required|min:5']);
+        $hero->update($request->only('bio'));
 
         return redirect("users/heroes/{$hero->id}")->with('success', 'Hero successfuly updated');
     }
