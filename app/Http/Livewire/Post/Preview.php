@@ -3,19 +3,22 @@
 namespace App\Http\Livewire\Post;
 
 use Livewire\Component;
+use App\Models\Post;
 
 class Preview extends Component
 {
-    public $post;
-    public $author_name;
+    public Post $post;
+    public string $author_name;
 
 
     public function mount()
     {
-        // dd($this->post);
         $this->author_name = '@' . $this->post->hero->user->username;
     }
 
+    /**
+     * Like the post
+     */
     public function like()
     {
         $this->post->like();
