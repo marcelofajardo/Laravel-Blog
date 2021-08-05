@@ -10,8 +10,9 @@ use App\Models\User;
 class HeroTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test */
-    public function hero_auto_created_from_register_user()
+    public function hero_is_created_after_user_registration()
     {
         User::factory()->create();
         $this->assertDatabaseCount('heroes', 1);
