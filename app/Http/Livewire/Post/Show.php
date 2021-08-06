@@ -58,7 +58,7 @@ class Show extends Component
         }
 
         $this->post->update($validatedData);
-
+        $this->emit('refresh-posts');
         $this->isEdit_able = false;
         session()->flash('success', 'Post successfuly updated.');
     }

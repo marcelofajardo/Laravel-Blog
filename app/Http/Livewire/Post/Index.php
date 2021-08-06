@@ -10,7 +10,7 @@ class Index extends Component
     public Hero $hero;
     public $posts;
 
-    protected $listeners = ['refresh-post' => '$refresh'];
+    protected $listeners = ['refresh-posts' => '$refresh'];
 
     public function render()
     {

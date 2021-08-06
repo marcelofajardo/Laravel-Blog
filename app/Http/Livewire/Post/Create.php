@@ -49,7 +49,7 @@ class Create extends Component
         $this->body = '';
         $this->image = null;
 
-        $this->emitUp('refresh-post');
+        $this->emitUp('refresh-posts');
 
         session()->flash('success', 'Post successfully Created.');
     }
