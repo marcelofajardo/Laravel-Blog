@@ -69,5 +69,45 @@ class PostLikeTest extends TestCase
             ->call('like');
 
         $this->assertDatabaseMissing('likes', ['liked' => true]);
+        $this->assertDatabaseCount('likes', 0);
+    }
+
+    /** @test */
+    public function preview_component_can_unlike_a_post()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $post = Post::factory()->Create(['postable_id' => $user2->id]);
+
+        Livewire::actingAs($user);
+
+        $post->like();
+
+        Livewire::test('post.preview', ['post' => $post])
+            ->assertSet('post', $post)
+            ->call('like');
+
+        $this->assertDatabaseMissing('likes', ['liked' => true]);
+        $this->assertDatabaseCount('likes', 0);
+    }
+
+    /** @test */
+    public function post_show_component_can_unlike_a_post()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+        $post = Post::factory()->Create(['postable_id' => $user2->id]);
+
+        Livewire::actingAs($user);
+
+        $post->Like();
+
+        Livewire::test('post.show', ['post' => $post])
+            ->assertSet('post', $post)
+            ->call('like')
+            ->assertNoRedirect();
+
+        $this->assertDatabaseMissing('likes', ['liked' => true]);
+        $this->assertDatabaseCount('likes', 0);
     }
 }
