@@ -8,7 +8,6 @@ use App\Models\Hero;
 class Index extends Component
 {
     public Hero $hero;
-    public $posts;
 
     protected $listeners = ['refresh-posts' => '$refresh'];
 

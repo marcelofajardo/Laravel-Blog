@@ -7,7 +7,6 @@
 
     @livewire('post.index', [
     'hero' => $hero,
-    'posts' => $posts
     ])
   </div>
 </x-app-layout>

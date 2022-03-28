@@ -61,4 +61,17 @@ class Hero extends Model
     {
         return $this->user->username;
     }
+
+    public function getPostsAndFollowersPostsAttribute() {
+        // posts from followed user and this user
+        $followers = $this->user->following->pluck('id');
+        $heroes_ids = $followers->merge([$this->id]);
+        $posts = Post::whereIn('hero_id', $heroes_ids)->get();
+
+        // this user posts on other users
+        $posts_on_other_users = Post::where("postable_id", $this->id)->get();
+        $posts = $posts->merge($posts_on_other_users);
+
+        return $posts;
+    }
 }

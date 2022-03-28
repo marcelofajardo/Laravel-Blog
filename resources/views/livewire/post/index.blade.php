@@ -3,7 +3,7 @@
     @livewire('post.create', ['model' => $hero])
   </div>
 
-  @forelse ($posts as $post)
+  @forelse ($hero->posts_and_followers_posts as $post)
     <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200 p-2 pb-6">
       @livewire('post.preview', ['post' => $post], key($post->id))
     </div>
