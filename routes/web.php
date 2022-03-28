@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // TODO: Refactor
-// 0. add sweet alert by realrashid
+// 0. add sweet alert by realrashid (refer to "archive-laravel-blog" repo)
 // 1. Fix factory/seeder
 // 2. Add more tests
 // 3. Improve UI
