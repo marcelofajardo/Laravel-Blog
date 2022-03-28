@@ -2,7 +2,7 @@
   {{-- HEADER --}}
   <div>
     <p class="text-xs text-gray-700">
-      <a class="font-semibold hover:text-blue-400" href="#">{{$post->author_name}}</a>
+      <a class="font-semibold hover:text-blue-400" href={{"/users/heroes/{$post->author_id}"}}>{{$post->author_name}}</a>
       &bull; Posted {{$post->created_at}}
     </p>
   </div>
