@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // TODO: Refactor
+// 0. Fix sweet alert
 // 1. Fix factory/seeder
 // 2. Add more tests
 // 3. Improve UI
 // 4. Upgrade to latest versions
 // 5. Refactor code
+// 6. Hero can edit the hero page
 
 
 Route::get('/', function () {
