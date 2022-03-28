@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // TODO: Refactor
-// 0. Fix sweet alert
+// 0. add sweet alert by realrashid
 // 1. Fix factory/seeder
 // 2. Add more tests
 // 3. Improve UI
