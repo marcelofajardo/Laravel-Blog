@@ -25,6 +25,14 @@
                     hover:border-blue-400">
                 posts
             </a>
+
+            <a onClick="(e) => e.preventDefault();document.querySelector('#logout-form').submit();" href="#" class="py-1 px-2 border-b-2 border-transparent
+                    hover:border-blue-400">
+                Logout
+            </a>
+<form id="logout-form" action="/logout" method="post" class="hidden">
+@csrf
+</form>
         </div>
     </div>
 

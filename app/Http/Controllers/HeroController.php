@@ -14,9 +14,13 @@ class HeroController extends Controller
      */
     public function show(Hero $hero)
     {
+        // postable/hero_id seems wrong
         $followers = $hero->user->following->pluck('id');
         $heroes = $followers->merge([$hero->id]);
+        $posts_from_users = Post::where("postable_id", $hero->id)->get();
         $posts = Post::whereIn('hero_id', $heroes)->get();
+        $posts = $posts->merge($posts_from_users);
+
 
         return view('hero.show', [
             'hero' => $hero,

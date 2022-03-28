@@ -3,7 +3,7 @@
   <div>
     <p class="text-xs text-gray-700">
       <a class="font-semibold hover:text-blue-400" href={{"/users/heroes/{$post->author_id}"}}>{{$post->author_name}}</a>
-      &bull; Posted {{$post->created_at}}
+      &bull; Posted {{$post->created_at}} on {{ $post->postable->username}}
     </p>
   </div>
 

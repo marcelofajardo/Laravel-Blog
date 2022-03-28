@@ -50,12 +50,12 @@ class Post extends Model
 
     public function getAuthorIdAttribute()
     {
-        return $this->postable->id;
+        return $this->hero->id;
     }
 
     public function getAuthorNameAttribute()
     {
-        return '@' . $this->postable->username;
+        return '@' . $this->hero->username;
     }
 
     public function getImageUrlAttribute()
