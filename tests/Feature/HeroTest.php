@@ -34,7 +34,7 @@ class HeroTest extends TestCase
         $response = $this->get("/users/heroes/{$user->id}");
         $response->assertOk();
         $response->assertViewIs('hero.show');
-        $response->assertViewHasAll(['hero', 'posts']);
+        $response->assertViewHas('hero');
     }
 
     /** @test */
